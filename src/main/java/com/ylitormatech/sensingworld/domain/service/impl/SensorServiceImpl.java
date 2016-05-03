@@ -1,6 +1,6 @@
 package com.ylitormatech.sensingworld.domain.service.impl;
 
-import com.ylitormatech.sensingworld.domain.entity.Sensor;
+import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
 import com.ylitormatech.sensingworld.domain.repository.SensorRepository;
 import com.ylitormatech.sensingworld.domain.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,31 +11,34 @@ import java.util.List;
 /**
  * Created by Marco Ylitörmä on 02/05/16.
  */
-@Service
+@Service("sensorService")
 public class SensorServiceImpl implements SensorService{
 
     @Autowired
-    SensorRepository sensorsRepository;
+    SensorRepository sensorRepository;
 
-    public List<Sensor> getSensors() {
-        return sensorsRepository.findAll();
-    }
+//    public List<SensorEntity> getSensors() {
+//        return sensorRepository.findAll();
+//    }
+//
+//    public SensorEntity get(Integer id) {
+//        return sensorRepository.find(id);
+//    }
+//
+//    public void update(SensorEntity s) {
+//        sensorRepository.update(s);
+//    }
+//
+//    public SensorEntity remove(SensorEntity s) {
+//        return sensorRepository.remove(s.getId());
+//    }
 
-    public Sensor get(Integer id) {
-        return sensorsRepository.find(id);
-    }
+    public SensorEntity create(String name, List<String> usage) {
 
-    public void update(Sensor s) {
-        sensorsRepository.update(s);
-    }
-
-    public Sensor remove(Sensor s) {
-        return sensorsRepository.remove(s.getId());
-    }
-
-    public void create(Sensor s) {
-        // STUPID WAY TO CREATE IDs. BUT THIS IS JUST DEMO CODE.
-        s.setId(sensorsRepository.getCounter() +1);
-        sensorsRepository.add(s);
+        SensorEntity sensorEntity = new SensorEntity();
+        sensorEntity.setName(name);
+        //sensorEntity.setUsage(usage);
+        sensorRepository.add(sensorEntity);
+        return sensorEntity;
     }
 }

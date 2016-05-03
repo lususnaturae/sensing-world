@@ -14,11 +14,14 @@
         <bean class=".....HelloController"></bean>
         annotation-driven scans @RequestMapping annotaions
     -->
+
+
     <mvc:annotation-driven />
 
-    <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" />
-
     <context:component-scan base-package="com.ylitormatech.sensingworld" />
+
+    <!--<mvc:resources mapping="/resources/**" location="WEB-INF/resources/" />-->
+
 
 
 
@@ -49,6 +52,7 @@
         <property name="order" value="1" />
         <property name="viewNames" value="/thyme/*" />
     </bean>
+
 
 
 </beans>
