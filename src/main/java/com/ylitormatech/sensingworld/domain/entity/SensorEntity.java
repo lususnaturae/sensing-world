@@ -1,15 +1,12 @@
 package com.ylitormatech.sensingworld.domain.entity;
 
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by Marco Ylitörmä on 02/05/16.
  */
-@Table(name = "sensor")
+@Table(name = "sensors")
 @Entity
 public class SensorEntity {
 
@@ -18,19 +15,18 @@ public class SensorEntity {
     @GeneratedValue
     Integer id;
 
-    @Column(length = 50)
+    @Column(length = 40)
     String name;
 
-
-    //List<String> usage;
+    @Column(length = 40)
+    String usagetoken;
 
     public SensorEntity() {
     }
 
-    public SensorEntity(Integer id, String name, List<String> usage) {
-        this.id = id;
+    public SensorEntity(String name, String usagetoken) {
         this.name = name;
-        //this.usage = usage;
+        this.usagetoken = usagetoken;
     }
 
 
@@ -38,9 +34,9 @@ public class SensorEntity {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public String getName() {
         return name;
@@ -50,12 +46,11 @@ public class SensorEntity {
         this.name = name;
     }
 
-//    public List<String> getUsage() {
-//        return usage;
-//    }
-//
-//    public void setUsage(List<String> usage) {
-//        this.usage = usage;
-//    }
+    public String getUsagetoken() {
+        return usagetoken;
+    }
 
+    public void setUsagetoken(String usagetoken) {
+        this.usagetoken = usagetoken;
+    }
 }

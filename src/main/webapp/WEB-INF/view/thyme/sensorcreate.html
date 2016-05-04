@@ -3,10 +3,11 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"/>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.3/holder.min.js"/>
     <title>Sensor Update Form</title>
 
 </head>
@@ -19,31 +20,55 @@
             <strong th:text="#{thyme.create.h1}">Luo sensorit perusteksti</strong></h3>
     </div>
     <div class="panel-body">
-        <form method="post"  th:action="@{/create}">
+        <form method="post" th:action="@{/create}" th:object="${sensorForm}">
 
-            <div class="form-group">
-                <label class="control-label" th:value="#{sensorcreate.label.name}">
-                    Sensorin nimi
-                </label>
-                <input cssClass="form-control" type="text" value="${sensorForm.name}"/>
 
-                    <div th:each="usagechoice : ${usageChoices}">
-                        <input type="checkbox" name="searchValues" th:name="usage" th:value="${usagechoice}" />
-                        <label th:text="#{${usagechoice}}"></label>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label" th:value="#{sensorcreate.label.name}">
+                            Sensorin nimi
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" size="40" name="name" th:placeholder="#{name.placeholder}"/>
                     </div>
 
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label" th:value="#{sensorcreate.label.name}">
+                            Sensorin nimi
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <div th:each="usagechoice : ${usageChoices}">
+                            <input type="radio" name="usageToken"  th:value="${usagechoice}"/>
+                            <label th:text="#{${usagechoice}}"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <img src="holder.js/200x200"/>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-xs btn-primary" disabled="disabled" th:text="#{sensorcreate.addimgbutton.name}">Lataa kuva</button>
+
+                </div>
             </div>
 
 
 
+
+            <button type="submit" class="btn btn-small btn-primary" th:text="#{sensorcreate.savebutton.name}" >SENS</button>
         </form>
 
 
     </div>
-    <button type="submit" class="btn btn-small btn-primary">Tallenna</button>
+
 </div>
-
-
 
 
 </body>

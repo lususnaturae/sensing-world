@@ -1,5 +1,6 @@
 package com.ylitormatech.sensingworld.controller;
 
+import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
 import com.ylitormatech.sensingworld.domain.service.SensorService;
 import com.ylitormatech.sensingworld.web.SensorForm;
 import org.springframework.beans.BeanUtils;
@@ -29,8 +30,8 @@ public class SensorController {
     @ModelAttribute
     public void initValues(Model model) {
         model.addAttribute(USAGE_CHOICES, Arrays.asList(
-                "usage.temperature", "usage.location", "usage.speed",
-                "usage.direction", "usage.alert", "usage.flag", "usage.multifunction"));
+                "usagetoken.temperature", "usagetoken.location", "usagetoken.speed",
+                "usagetoken.direction", "usagetoken.alert", "usagetoken.flag", "usagetoken.multifunction"));
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -45,7 +46,8 @@ public class SensorController {
     public String createSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, Model model) {
 
         // TODO: add validator
-        BeanUtils.copyProperties(sensorService.create(sensorForm.getName(),sensorForm.getUsage()), sensorForm);
+        SensorEntity obj = sensorService.create(sensorForm.getName(), sensorForm.getUsageToken());
+        BeanUtils.copyProperties(obj, sensorForm);
         model.addAttribute("userForm", sensorForm);
         return "/thyme/sensorshow";
     }

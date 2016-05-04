@@ -7,12 +7,14 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.HashMap;
 
 /**
  * Created by Marco Ylitörmä on 02/05/16.
  */
 @Repository("sensorRepository")
+@Transactional
 public class SensorRepositoryImpl implements SensorRepository{
 
     @PersistenceContext

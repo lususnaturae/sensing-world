@@ -16,5 +16,5 @@ public interface SensorService {
 //
 //    public SensorEntity remove(SensorEntity q);
 
-    public SensorEntity create(String name, List<String> usage);
+    public SensorEntity create(String name, String usage);
 }

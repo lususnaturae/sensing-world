@@ -8,7 +8,7 @@ import java.util.List;
 public class SensorForm {
 
     String name;
-    List<String> usage;
+    String usageToken;
 
     public String getName() {
         return name;
@@ -18,11 +18,11 @@ public class SensorForm {
         this.name = name;
     }
 
-    public List<String> getUsage() {
-        return usage;
+    public String getUsageToken() {
+        return usageToken;
     }
 
-    public void setUsage(List<String> usage) {
-        this.usage = usage;
+    public void setUsageToken(String usageToken) {
+        this.usageToken = usageToken;
     }
 }
