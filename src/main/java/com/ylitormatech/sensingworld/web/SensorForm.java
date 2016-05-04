@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class SensorForm {
 
+    Integer id;
     String name;
     String usageToken;
 

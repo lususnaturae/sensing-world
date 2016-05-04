@@ -48,7 +48,7 @@ public class SensorController {
         // TODO: add validator
         SensorEntity obj = sensorService.create(sensorForm.getName(), sensorForm.getUsageToken());
         BeanUtils.copyProperties(obj, sensorForm);
-        model.addAttribute("userForm", sensorForm);
+        //model.addAttribute("userForm", sensorForm);
         return "/thyme/sensorshow";
     }
 

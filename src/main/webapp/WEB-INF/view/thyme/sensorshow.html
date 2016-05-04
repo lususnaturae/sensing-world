@@ -3,15 +3,67 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>CRUD and List Templates</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" media="all"
-          href="../../resources/css/gtvg.css" th:href="@{/resources/css/gtvg.css}" />
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <div th:replace="/fragments/header :: headerscripts">&nbsp;</div>
+    <title>Sensor Show Form</title>
+
 </head>
 
 <body>
 
 <h1 th:text="#{thyme.create.h1}">Näytä sensori</h1>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="background-color: green;">
+        <h3 class="panel-title" style="color: white;">
+            <strong th:text="#{thyme.create.h1}">Luo sensorit perusteksti</strong></h3>
+    </div>
+    <div class="panel-body">
+        <form method="post" th:action="@{/create}" th:object="${sensorForm}">
+
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label" th:value="#{sensorcreate.label.name}">
+                            Sensorin nimi
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <span th:text="${sensorForm.name}">Sensorin nimi</span>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label" th:value="#{sensorcreate.label.name}">
+                            Sensorin tyyppi
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <span th:text="#{${sensorForm.usageToken}}">Sensorin nimi</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <img src="holder.js/200x200"/>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-small btn-primary" th:text="#{sensorshow.tosensorlistbutton.name}" >SENS</button>
+        </form>
+
+
+    </div>
+
+</div>
+
+<div th:replace="/fragments/footer :: footer">&copy; 2016 Ylitormatech</div>
+
 
 </body>
 

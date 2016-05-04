@@ -4,11 +4,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"/>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.3/holder.min.js"/>
-    <title>Sensor Update Form</title>
+    <div th:replace="/fragments/header :: headerscripts">&nbsp;</div>
+    <title>Sensor Create Form</title>
 
 </head>
 
@@ -58,18 +55,13 @@
 
                 </div>
             </div>
-
-
-
-
             <button type="submit" class="btn btn-small btn-primary" th:text="#{sensorcreate.savebutton.name}" >SENS</button>
         </form>
-
-
     </div>
 
 </div>
 
+<div th:replace="/fragments/footer :: footer">&copy; 2016 Ylitormatech</div>
 
 </body>
 
