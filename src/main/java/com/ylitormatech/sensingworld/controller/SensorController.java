@@ -45,7 +45,7 @@ public class SensorController {
     public String createSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, Model model) {
         logger.debug("Create SensorEntity Controller - POST");
         // TODO: add validator
-        SensorEntity sensorEntity = sensorService.create(sensorForm.getName(), sensorForm.getUsageToken());
+        SensorEntity sensorEntity = sensorService.create(sensorForm.getName(), sensorForm.getUsagetoken());
         BeanUtils.copyProperties(sensorEntity, sensorForm);
         return "/thyme/sensorshow";
     }
@@ -65,8 +65,8 @@ public class SensorController {
         logger.debug("Show SensorEntity Controller - GET");
 
         SensorEntity sensor = sensorService.find(id);
-        model.addAttribute("sensors", sensor);
-        return "/thyme/sensorlist";
+        model.addAttribute("sensorForm", sensor);
+        return "/thyme/sensorshow";
     }
 
 }

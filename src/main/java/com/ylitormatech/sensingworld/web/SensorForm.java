@@ -9,7 +9,15 @@ public class SensorForm {
 
     Integer id;
     String name;
-    String usageToken;
+    String usagetoken;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -19,11 +27,11 @@ public class SensorForm {
         this.name = name;
     }
 
-    public String getUsageToken() {
-        return usageToken;
+    public String getUsagetoken() {
+        return usagetoken;
     }
 
-    public void setUsageToken(String usageToken) {
-        this.usageToken = usageToken;
+    public void setUsagetoken(String usagetoken) {
+        this.usagetoken = usagetoken;
     }
 }

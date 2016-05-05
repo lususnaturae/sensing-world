@@ -21,7 +21,6 @@
             <strong th:text="#{form.sensorshow.formtitle}">Luo sensorit perusteksti</strong></h3>
     </div>
     <div class="panel-body">
-        <form method="post" th:action="@{/create}" th:object="${sensorForm}">
 
 
             <div class="col-md-6">
@@ -44,7 +43,7 @@
                         </label>
                     </div>
                     <div class="col-md-8">
-                        <span th:text="#{${sensorForm.usageToken}}">Sensorin nimi</span>
+                        <span th:text="#{${sensorForm.usagetoken}}">Sensorin nimi</span>
                     </div>
                 </div>
             </div>
@@ -54,8 +53,8 @@
                 </div>
 
             </div>
-            <button type="submit" class="btn btn-small btn-primary" th:text="#{form.sensorshow.tosensorlistbutton.name}" >SENS</button>
-        </form>
+            <a role="button" th:href="@{/list}" class="btn btn-small btn-primary" th:text="#{form.sensorshow.tosensorlistbutton.name}" >SENS</a>
+
 
 
     </div>
