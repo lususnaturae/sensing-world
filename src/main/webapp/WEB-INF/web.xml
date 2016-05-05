@@ -5,11 +5,6 @@
          version="3.0">
   <display-name>HelloWorld Spring</display-name>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener
-        </listener-class>
-    </listener>
-
     <!-- Loads Spring Security config file -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -17,6 +12,11 @@
             classpath:META-INF/root.xml
         </param-value>
     </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
 
     <servlet>
         <servlet-name>thyme</servlet-name>
@@ -33,5 +33,25 @@
         <servlet-name>thyme</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+
+    <filter>
+        <filter-name>FilterI18nCookie</filter-name>
+        <filter-class>com.ylitormatech.sensingworld.security.FilterI18nSpringSecurity</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FilterI18nCookie</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

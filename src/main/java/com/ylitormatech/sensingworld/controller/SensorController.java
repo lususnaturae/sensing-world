@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Created by Marco Ylitörmä on 02/05/16.
@@ -35,7 +36,7 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createSensor(Model model) {
+    public String createSensor(Locale locale, Model model) {
         // TODO: Add debug logger
         //logger.debug("Create SensorEntity Controller - GET");
         return "/thyme/sensorcreate";
