@@ -8,11 +8,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -38,21 +37,36 @@ public class SensorController {
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createSensor(Locale locale, Model model) {
-        // TODO: Add debug logger
         logger.debug("Create SensorEntity Controller - GET");
-
         return "/thyme/sensorcreate";
-
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, Model model) {
         logger.debug("Create SensorEntity Controller - POST");
         // TODO: add validator
-        SensorEntity obj = sensorService.create(sensorForm.getName(), sensorForm.getUsageToken());
-        BeanUtils.copyProperties(obj, sensorForm);
-        //model.addAttribute("userForm", sensorForm);
+        SensorEntity sensorEntity = sensorService.create(sensorForm.getName(), sensorForm.getUsageToken());
+        BeanUtils.copyProperties(sensorEntity, sensorForm);
         return "/thyme/sensorshow";
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String listSensors(Locale locale, Model model) {
+        logger.debug("List SensorEntity Controller - GET");
+        // TODO: add validator
+        List<SensorEntity> sensors = sensorService.findAll();
+        model.addAttribute("sensors", sensors);
+        return "/thyme/sensorlist";
+    }
+
+
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public String showSensor( @PathVariable("id") Integer id, Model model) {
+        logger.debug("Show SensorEntity Controller - GET");
+
+        SensorEntity sensor = sensorService.find(id);
+        model.addAttribute("sensors", sensor);
+        return "/thyme/sensorlist";
     }
 
 }

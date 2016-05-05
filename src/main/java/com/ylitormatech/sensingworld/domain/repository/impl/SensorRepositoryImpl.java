@@ -8,7 +8,10 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Marco Ylitörmä on 02/05/16.
@@ -20,7 +23,7 @@ public class SensorRepositoryImpl implements SensorRepository{
     @PersistenceContext
     EntityManager em;
 
-    // private HashMap<Integer, SensorEntity> sensors = new HashMap<Integer, SensorEntity>();
+    private HashMap<Integer, SensorEntity> sensors = new HashMap<Integer, SensorEntity>();
 
     //private int counter = 0;
 
@@ -37,6 +40,23 @@ public class SensorRepositoryImpl implements SensorRepository{
 
     public void add(SensorEntity sensorEntity) {
         em.persist(sensorEntity);
+    }
+
+    public List<SensorEntity> findAll() {
+        List<SensorEntity> list = em.createQuery("FROM SensorEntity").getResultList();
+        return list;
+    }
+
+        public SensorEntity find(Integer id) {
+        SensorEntity sensorEntity = null;
+        // by id, which should also be hashmap key but just to be sure iterate.
+        for (Map.Entry<Integer, SensorEntity> entry : sensors.entrySet()) {
+            if (entry.getValue().getId().intValue() == id.intValue()) {
+                sensorEntity = entry.getValue();
+                continue;
+            }
+        }
+        return sensorEntity;
     }
 
 //    public void update(SensorEntity sensorEntity) {
@@ -70,9 +90,5 @@ public class SensorRepositoryImpl implements SensorRepository{
 //        return sensorEntity;
 //    }
 //
-//    public List<SensorEntity> findAll() {
-//        // hashmap to list, is this necessary?
-//        List<SensorEntity> list = new ArrayList<SensorEntity>(sensors.values());
-//        return list;
-//    }
+
 }

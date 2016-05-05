@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by Marco Ylitörmä on 02/05/16.
@@ -17,14 +18,14 @@ public class SensorServiceImpl implements SensorService{
     @Autowired
     SensorRepository sensorRepository;
 
-//    public List<SensorEntity> getSensors() {
-//        return sensorRepository.findAll();
-//    }
-//
-//    public SensorEntity get(Integer id) {
-//        return sensorRepository.find(id);
-//    }
-//
+    public List<SensorEntity> findAll() {
+        return sensorRepository.findAll();
+    }
+
+    public SensorEntity find(Integer id) {
+        return sensorRepository.find(id);
+    }
+
 //    public void update(SensorEntity s) {
 //        sensorRepository.update(s);
 //    }

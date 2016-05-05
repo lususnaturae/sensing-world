@@ -8,10 +8,10 @@ import java.util.List;
  * Created by Marco Ylitörmä on 02/05/16.
  */
 public interface SensorService {
-//    public List<SensorEntity> getSensors();
-//
-//    public SensorEntity get(Integer id);
-//
+    public List<SensorEntity> findAll();
+
+    public SensorEntity find(Integer id);
+
 //    public void update(SensorEntity q);
 //
 //    public SensorEntity remove(SensorEntity q);
