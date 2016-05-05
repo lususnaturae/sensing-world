@@ -3,6 +3,7 @@ package com.ylitormatech.sensingworld.controller;
 import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
 import com.ylitormatech.sensingworld.domain.service.SensorService;
 import com.ylitormatech.sensingworld.web.SensorForm;
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ import java.util.Locale;
 @Controller
 public class SensorController {
 
-    //Log.Logger logger = Logger.getLogger(this.getClass().getName());
+    Logger logger = Logger.getLogger(this.getClass().getName());
 
 
     @Autowired
@@ -38,14 +39,15 @@ public class SensorController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createSensor(Locale locale, Model model) {
         // TODO: Add debug logger
-        //logger.debug("Create SensorEntity Controller - GET");
+        logger.debug("Create SensorEntity Controller - GET");
+
         return "/thyme/sensorcreate";
 
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, Model model) {
-
+        logger.debug("Create SensorEntity Controller - POST");
         // TODO: add validator
         SensorEntity obj = sensorService.create(sensorForm.getName(), sensorForm.getUsageToken());
         BeanUtils.copyProperties(obj, sensorForm);
