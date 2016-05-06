@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @RequestMapping(value = {"/", ""})
-    public String homejsp() {
-        return "/jsp/home";
+    public String homePage() {
+        return "/thyme/home";
     }
 }
