@@ -22,7 +22,7 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     public UserEntity getUser(String username) {
-        return em.createQuery("FROM User u WHERE u.username=:username", UserEntity.class).setParameter("username",username).getSingleResult();
+        return em.createQuery("FROM UserEntity u WHERE u.username=:username", UserEntity.class).setParameter("username",username).getSingleResult();
     }
 
     public List<UserEntity> getUsers() {

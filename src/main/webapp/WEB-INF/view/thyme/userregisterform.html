@@ -1,0 +1,99 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+
+<head >
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <div th:replace="/fragments/header :: headerscripts">&nbsp;</div>
+    <title>Sensor Create Form</title>
+
+</head>
+
+<body>
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="background-color: green;">
+        <h3 class="panel-title" style="color: white;">
+            <strong th:text="#{form.userregister.formtitle}">Luo sensorit perusteksti</strong></h3>
+    </div>
+    <div class="panel-body">
+
+        <form th:object="${user}" method="post" th:action="@{/account/register}" >
+
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label" th:text="#{form.userregister.username.label}">
+                           Käyttäjätunnus
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" th:field="*{username}" name="username" th:placeholder="#{form.userregister.username.placeholder}"/>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label" th:text="#{form.userregister.password.label}">
+                            Salasana
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" th:field="*{password}" size="40" name="password"
+                               th:placeholder="#{form.userregister.password.placeholder}"/>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label" th:text="#{form.userregister.email.label}">
+                            Sähköposti
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" th:field="*{email}" size="40" name="email"
+                               th:placeholder="#{form.userregister.email.placeholder}"/>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label" th:text="#{form.userregister.role.label}">
+                            Rooli
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" th:field="*{role}" size="40" name="role"
+                               th:placeholder="#{form.userregister.role.placeholder}"/>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <img data-src="holder.js/200x200"/>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-xs btn-primary" disabled="disabled"
+                            th:text="#{form.userregister.addimgbutton.name}">Lataa oma kuvasi
+                    </button>
+
+                </div>
+            </div>
+            <button type="submit" class="btn btn-small btn-primary" th:text="#{form.userregister.registerbutton.name}">
+                SENS
+            </button>
+
+
+        </form>
+    </div>
+
+</div>
+
+<div th:replace="/fragments/footer :: footer">&copy; 2016 Ylitormatech</div>
+
+</body>
+</html>
+
