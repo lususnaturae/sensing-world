@@ -1,5 +1,7 @@
 package com.ylitormatech.sensingworld.web;
 
+import org.springframework.core.style.ToStringCreator;
+
 import java.util.List;
 
 /**
@@ -34,4 +36,6 @@ public class SensorForm {
     public void setUsagetoken(String usagetoken) {
         this.usagetoken = usagetoken;
     }
+
+
 }

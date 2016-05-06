@@ -11,13 +11,13 @@
 <div class="panel panel-default">
     <div class="panel-heading" style="background-color: green;">
         <h3 class="panel-title" style="color: white;">
-            <strong th:text="#{form.sensorshow.formtitle}">Luo sensorit perusteksti</strong></h3>
+            <strong th:text="#{form.sensordeleteconfirmation.formtitle}">Luo sensorit perusteksti</strong></h3>
     </div>
     <div class="panel-body">
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-4">
-                        <label class="control-label" th:text="#{form.sensorshow.name.label}">
+                        <label class="control-label" th:text="#{form.sensordeleteconfirmation.name.label}">
                             Sensorin nimi
                         </label>
                     </div>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <label class="control-label" th:text="#{form.sensorcreate.usagetoken.label}">
+                        <label class="control-label" th:text="#{form.sensordeleteconfirmation.usagetoken.label}">
                             Sensorin tyyppi
                         </label>
                     </div>
@@ -41,10 +41,8 @@
                     <img data-src="holder.js/200x200"/>
                 </div>
             </div>
-            <a role="button" th:href="@{/sensors/__${sensorForm.id}__/update}" class="btn btn-small btn-primary" th:text="#{form.sensorshow.editsensorbutton.name}" >Muokkaa</a>
-        <a role="button" th:href="@{/sensors/__${sensorForm.id}__/deleteconfirmation}" class="btn btn-small btn-danger" th:text="#{form.sensorshow.deletesensorbutton.name}" >Poista</a>
-        <a role="button" th:href="@{/sensors/list}" class="btn btn-small btn-default " th:text="#{form.sensorshow.tosensorlistbutton.name}" >Palaa</a>
-
+        <a role="button" th:href="@{/sensors/__${sensorForm.id}__/delete}" class="btn btn-small btn-danger" th:text="#{form.sensordeleteconfirmation.deletesensorbutton.name}" >Muokkaa2</a>
+            <a role="button" th:href="@{/sensors/list}" class="btn btn-small btn-default" th:text="#{form.sensordeleteconfirmation.tosensorlistbutton.name}" >SENS</a>
     </div>
 </div>
 <div th:replace="/fragments/footer :: footer">&copy; 2016 Ylitormatech</div>

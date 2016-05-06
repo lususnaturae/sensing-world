@@ -26,13 +26,13 @@ public class SensorServiceImpl implements SensorService{
         return sensorRepository.find(id);
     }
 
-//    public void update(SensorEntity s) {
-//        sensorRepository.update(s);
-//    }
-//
-//    public SensorEntity remove(SensorEntity s) {
-//        return sensorRepository.remove(s.getId());
-//    }
+    public void update(SensorEntity s) {
+        sensorRepository.update(s);
+    }
+
+    public void remove(Integer id) {
+        sensorRepository.remove(id);
+    }
 
     public SensorEntity create(String name, String usage) {
 

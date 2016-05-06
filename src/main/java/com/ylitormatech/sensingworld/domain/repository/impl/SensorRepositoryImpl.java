@@ -39,17 +39,16 @@ public class SensorRepositoryImpl implements SensorRepository{
         return (SensorEntity) query.getSingleResult();
     }
 
-//    public void update(SensorEntity sensorEntity) {
-//        // quotes are compared by their id
-//        for (Map.Entry<Integer, SensorEntity> entry : sensors.entrySet()) {
-//            if (entry.getValue().getId().intValue() == sensorEntity.getId().intValue()) {
-//                sensors.put(entry.getKey(),sensorEntity);
-//                continue;
-//            }
-//        }
-//
-//    }
-//
+    public void update(SensorEntity sensorEntity) {
+        em.merge(sensorEntity);
+    }
+
+    public void remove(Integer id) {
+        Query query = em.createQuery("FROM SensorEntity WHERE id=:id");
+        query.setParameter("id", id);
+        em.remove((SensorEntity) query.getSingleResult());
+    }
+
 //    public SensorEntity find(Integer id) {
 //        SensorEntity sensorEntity = null;
 //        // by id, which should also be hashmap key but just to be sure iterate.

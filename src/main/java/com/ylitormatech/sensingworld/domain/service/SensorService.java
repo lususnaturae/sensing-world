@@ -12,9 +12,9 @@ public interface SensorService {
 
     public SensorEntity find(Integer id);
 
-//    public void update(SensorEntity q);
-//
-//    public SensorEntity remove(SensorEntity q);
+    public void update(SensorEntity q);
+
+    public void remove(Integer id);
 
     public SensorEntity create(String name, String usage);
 }

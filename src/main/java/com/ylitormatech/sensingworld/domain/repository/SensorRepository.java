@@ -19,11 +19,11 @@ public interface SensorRepository {
     public SensorEntity find(Integer id);
 
 
-//    public void update(SensorEntity sensorEntity);
-//
+    public void update(SensorEntity sensorEntity);
 
-//    public SensorEntity remove(Integer id);
-//
+
+    public void remove(Integer id);
+
 
 
 }

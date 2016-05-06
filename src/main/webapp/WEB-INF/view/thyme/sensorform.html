@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}" th:lang="${lang}">
@@ -18,7 +18,8 @@
             <strong th:text="#{form.sensorcreate.formtitle}">Luo sensorit perusteksti</strong></h3>
     </div>
     <div class="panel-body">
-        <form method="post" th:action="@{/create}" th:object="${sensorForm}">
+
+        <form th:object="${sensorForm}" method="post" th:action="@{/sensors/__(${sensorForm['new']} ? '': ${id})____(${sensorForm['new']} ? 'new' : '/update')__}">
 
 
             <div class="col-md-6">
@@ -29,7 +30,7 @@
                         </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" size="40" name="name"
+                        <input type="text" th:field="*{name}" size="40" name="name"
                                th:placeholder="#{form.sensorcreate.name.placeholder}"/>
                     </div>
 
@@ -42,7 +43,7 @@
                     </div>
                     <div class="col-md-8">
                         <div th:each="usagechoice : ${usageChoices}">
-                            <input type="radio" name="usagetoken" th:value="${usagechoice}"/>
+                            <input type="radio" name="usagetoken"  th:field="*{usagetoken}" th:value="${usagechoice}"/>
                             <label th:text="#{${usagechoice}}"></label>
                         </div>
                     </div>
@@ -50,7 +51,7 @@
             </div>
             <div class="col-md-6">
                 <div class="row">
-                    <img src="holder.js/200x200"/>
+                    <img data-src="holder.js/200x200"/>
                 </div>
                 <div class="row">
                     <button type="button" class="btn btn-xs btn-primary" disabled="disabled"
@@ -59,9 +60,15 @@
 
                 </div>
             </div>
-            <button type="submit" class="btn btn-small btn-primary" th:text="#{form.sensorcreateform.savebutton.name}">
+            <button th:if="${sensorForm['new']}" type="submit" class="btn btn-small btn-primary" th:text="#{form.sensorcreate.addbutton.name}">
                 SENS
             </button>
+            <button th:unless="${sensorForm['new']}" type="submit" class="btn btn-small btn-primary" th:text="#{form.sensorcreate.savebutton.name}">
+                SENS
+            </button>
+            <a role="button" th:href="@{/sensors/list}" class="btn btn-small btn-default " th:text="#{form.sensorshow.tosensorlistbutton.name}" >Palaa</a>
+
+
         </form>
     </div>
 
