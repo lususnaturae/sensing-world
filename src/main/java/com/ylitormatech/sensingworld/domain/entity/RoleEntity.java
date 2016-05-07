@@ -9,12 +9,15 @@ import java.util.Set;
 @Entity
 @Table(name = "role")
 public class RoleEntity {
-    private Integer id;
-    private String name;
-    private Set<UserEntity> users;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String name;
+    @ManyToMany(mappedBy = "users")
+    private Set<UserEntity> users;
+
+
     public Integer getId() {
         return id;
     }
@@ -31,7 +34,6 @@ public class RoleEntity {
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "users")
     public Set<UserEntity> getUsers() {
         return users;
     }

@@ -5,10 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by marco on 6.5.2016.
@@ -57,6 +54,15 @@ public class WwwUser implements UserDetails {
             return auth.getAuthority();
         }
         return null;
+    }
+
+    public Set<String> getRoleNames() {
+        Iterator<GrantedAuthority> i = grantedAuthorities.iterator();
+        Set<String> roleNames = new HashSet<String>();
+        while (i.hasNext()) {
+            roleNames.add(i.next().getAuthority());
+        }
+        return roleNames;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

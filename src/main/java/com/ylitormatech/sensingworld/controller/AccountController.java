@@ -30,10 +30,11 @@ public class AccountController {
 
     @RequestMapping(value = "/account/register", method = RequestMethod.POST)
     public String register2(@ModelAttribute("user") UserRegisterForm user, Model model) {
-        userService.register(new WwwUser(null, user.getUsername(), user.getPassword(), user.getEmail(), user.getRole()));
+        //// FIXME: 07/05/16
+        //userService.register(new WwwUser(null, user.getUsername(), user.getPassword(), user.getEmail(), user.getRoles()));
 
-        WwwUser u2 = userService.getUser(user.getUsername());
-        model.addAttribute("user", u2);
+        //WwwUser u2 = userService.getUser(user.getUsername());
+        //model.addAttribute("user", u2);
         return "/thyme/userregistered";
     }
 

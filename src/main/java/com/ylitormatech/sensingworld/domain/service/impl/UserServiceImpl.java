@@ -1,5 +1,6 @@
 package com.ylitormatech.sensingworld.domain.service.impl;
 
+import com.ylitormatech.sensingworld.domain.entity.RoleEntity;
 import com.ylitormatech.sensingworld.domain.entity.UserEntity;
 import com.ylitormatech.sensingworld.domain.repository.RoleRepository;
 import com.ylitormatech.sensingworld.domain.repository.UserRepository;
@@ -13,8 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by marco on 6.5.2016.
@@ -45,12 +45,19 @@ public class UserServiceImpl implements UserService{
         return getUser(username);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public void register(WwwUser u) {
         UserEntity dbu = new UserEntity();
         dbu.setEmail(u.getEmail());
         dbu.setPassword(passwordEncoder.encode(u.getPassword()));
-        dbu.setRoles(u.g);
+
+        Iterator<String> i = u.getRoleNames().iterator();
+        Set<RoleEntity> roles = new HashSet<>();
+        while (i.hasNext()) {
+            roles.add(roleRepository.getRole(i.next()));
+        }
+        dbu.setRoles(roles);
+
         dbu.setUsername(u.getUsername());
         userRepository.store(dbu);
     }
@@ -60,7 +67,7 @@ public class UserServiceImpl implements UserService{
         ArrayList<WwwUser> wwwUserArrayList = new ArrayList<WwwUser>();
         if (users != null && !users.isEmpty()) {
             for (UserEntity u : users) {
-                wwwUserArrayList.add(new WwwUser(new Long(u.getId()), u.getUsername(), u.getPassword(), u.getEmail(), u.getRole()));
+                wwwUserArrayList.add(new WwwUser(new Long(u.getId()), u.getUsername(), u.getPassword(), u.getEmail(), u.getRoles()));
             }
         }
         return wwwUserArrayList;
