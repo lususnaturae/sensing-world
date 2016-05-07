@@ -88,7 +88,7 @@ public class SensorController {
 
     @RequestMapping(value = "/sensors/{id}/deleteconfirmation", method = RequestMethod.GET)
     public String deleteonfirmationSensor( @PathVariable("id") Integer id, Model model) {
-        logger.debug("Update SensorEntity Controller - GET");
+        logger.debug("DeleteConfirmation SensorEntity Controller - GET");
 
         model.addAttribute("sensorForm", sensorService.find(id));
         return "/thyme/sensordeleteconfirmation";
@@ -96,7 +96,7 @@ public class SensorController {
 
     @RequestMapping(value = "/sensors/{id}/delete", method = RequestMethod.GET)
     public String deleteSensor( @PathVariable("id") Integer id, Model model) {
-        logger.debug("Update SensorEntity Controller - GET");
+        logger.debug("Delete SensorEntity Controller - GET");
 
         sensorService.remove(id);
         return "redirect:/sensors/list";

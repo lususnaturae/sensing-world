@@ -8,20 +8,20 @@ import javax.persistence.*;
 /**
  * Created by Marco Ylitörmä on 02/05/16.
  */
-@Table(name = "sensors")
+@Table(name = "sensor")
 @Entity
 public class SensorEntity {
 
 
     @Id
     @GeneratedValue
-    Integer id;
+    private Integer id;
 
     @Column(length = 40)
-    String name;
+    private String name;
 
     @Column(length = 40)
-    String usagetoken;
+    private String usagetoken;
 
     public SensorEntity() {
     }

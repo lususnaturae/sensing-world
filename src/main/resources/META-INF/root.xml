@@ -88,27 +88,34 @@
                 <security:user name="bob" password="bobspassword" authorities="ROLE_USER" />
             </security:user-service>
         </security:authentication-provider>
+        <security:authentication-provider user-service-ref="userDetailsService">
+            <security:password-encoder ref="encoder"/>
+        </security:authentication-provider>
     </security:authentication-manager>
+
+    <bean id="userDetailsService" class="com.ylitormatech.sensingworld.domain.service.impl.UserServiceImpl"></bean>
+
+    <bean id="encoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="11"/>
+    </bean>
 
     <security:http use-expressions="true"  >
         <security:csrf disabled="true" />
         <security:intercept-url pattern="/"  access="permitAll"/>
-        <security:intercept-url pattern="/create"  access="permitAll"/>
-        <security:intercept-url pattern="/home2"  access="permitAll"/>
-        <security:intercept-url pattern="/login"  access="permitAll"/>
-        <security:intercept-url pattern="/logout"  access="permitAll"/>
-        <security:intercept-url pattern="/mylogin"  access="permitAll"/>
-        <security:intercept-url pattern="/loggedin"  access="permitAll"/>
-        <security:intercept-url pattern="/loggedout"  access="permitAll"/>
-
-        <security:intercept-url pattern="/form"  access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/sensors/*"  access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/account/list"  access="hasRole('ROLE_ADMIN')"/>
 
 
         <!-- login-processing-url is /login and spring will log the user there or redirect back to login-page -->
-        <security:form-login login-page="/mylogin" default-target-url="/loggedin" />
+        <!--<security:form-login login-page="/mylogin" default-target-url="/loggedin" />-->
+        <security:form-login />
         <security:logout logout-success-url="/loggedout" />
 
         <security:anonymous enabled="true" username="anonymous" granted-authority="ROLE_ANONYMOUS" />
     </security:http>
 
+    <!--<bean id="myAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">-->
+        <!--<property name="userDetailsService" ref="userService" />-->
+    <!--</bean>-->
 </beans>

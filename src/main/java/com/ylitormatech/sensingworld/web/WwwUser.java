@@ -1,5 +1,6 @@
 package com.ylitormatech.sensingworld.web;
 
+import com.ylitormatech.sensingworld.domain.entity.RoleEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by marco on 6.5.2016.
@@ -39,8 +41,8 @@ public class WwwUser implements UserDetails {
         enabled = true;
     }
 
-    public WwwUser(Long id, String username, String password, String email, String role) {
-        grantedAuthorities.add(new SimpleGrantedAuthority(role));
+    public WwwUser(Long id, String username, String password, String email, Set<RoleEntity> roles) {
+        roles.forEach(role -> grantedAuthorities.add(new SimpleGrantedAuthority(role.getName())));
         setUsername(username);
         setPassword(password);
         setId(id);
