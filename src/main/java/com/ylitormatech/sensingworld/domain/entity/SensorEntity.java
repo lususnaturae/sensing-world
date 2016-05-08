@@ -8,7 +8,7 @@ import javax.persistence.*;
 /**
  * Created by Marco Ylitörmä on 02/05/16.
  */
-@Table(name = "sensor")
+@Table(name = "sensorentity")
 @Entity
 public class SensorEntity {
 

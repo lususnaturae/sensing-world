@@ -16,5 +16,5 @@ public interface SensorService {
 
     public void remove(Integer id);
 
-    public SensorEntity create(String name, String usage);
+    public SensorEntity add(String name, String usage);
 }

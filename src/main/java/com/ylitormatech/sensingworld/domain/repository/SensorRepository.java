@@ -9,21 +9,16 @@ import java.util.List;
  */
 public interface SensorRepository {
 
-    // just to create unique ids
-    //public int getCounter();
-
     void add(SensorEntity sensorEntity);
 
     public List<SensorEntity> findAll();
 
     public SensorEntity find(Integer id);
 
-
     public void update(SensorEntity sensorEntity);
-
 
     public void remove(Integer id);
 
-
+    public void remove(SensorEntity s);
 
 }

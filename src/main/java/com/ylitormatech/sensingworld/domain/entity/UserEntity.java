@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Created by marco on 6.5.2016.
  */
-@Table(name="user")
+@Table(name="userentity")
 @Entity
 public class UserEntity {
 
@@ -21,6 +21,8 @@ public class UserEntity {
     private String username;
     private String password;
     private String passwordConfirm;
+
+    @OneToMany
     private Set<RoleEntity> roles;
 
 
@@ -55,7 +57,7 @@ public class UserEntity {
         this.password = password;
     }
 
-    @Transient
+    //@Transient
     public String getPasswordConfirm() {
         return passwordConfirm;
     }
@@ -64,8 +66,7 @@ public class UserEntity {
         this.passwordConfirm = passwordConfirm;
     }
 
-    @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     public Set<RoleEntity> getRoles() {
         return roles;
     }
@@ -73,6 +74,7 @@ public class UserEntity {
     public void setRoles(Set<RoleEntity> roles) {
         this.roles = roles;
     }
+
 
 
 }

@@ -6,7 +6,6 @@ import com.ylitormatech.sensingworld.domain.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -18,24 +17,28 @@ public class SensorServiceImpl implements SensorService{
     @Autowired
     SensorRepository sensorRepository;
 
+    @Override
     public List<SensorEntity> findAll() {
         return sensorRepository.findAll();
     }
 
+    @Override
     public SensorEntity find(Integer id) {
         return sensorRepository.find(id);
     }
 
+    @Override
     public void update(SensorEntity s) {
         sensorRepository.update(s);
     }
 
+    @Override
     public void remove(Integer id) {
         sensorRepository.remove(id);
     }
 
-    public SensorEntity create(String name, String usage) {
-
+    @Override
+    public SensorEntity add(String name, String usage) {
         SensorEntity sensorEntity = new SensorEntity();
         sensorEntity.setName(name);
         sensorEntity.setUsagetoken(usage);

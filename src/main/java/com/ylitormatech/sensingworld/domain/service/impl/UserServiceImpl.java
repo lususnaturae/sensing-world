@@ -31,22 +31,26 @@ public class UserServiceImpl implements UserService{
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public WwwUser getUser(String username) {
-        UserEntity u = userRepository.getUser(username);
+    @Override
+    public WwwUser find(String username) {
+        UserEntity u = userRepository.find(username);
         return new WwwUser(new Long(u.getId()),u.getUsername(), u.getPassword(),u.getEmail(),u.getRoles());
     }
 
-    public WwwUser getUser(Long userId) {
-        UserEntity u = userRepository.getUser(userId.intValue());
+    @Override
+    public WwwUser find(Integer id) {
+        UserEntity u = userRepository.find(id.intValue());
         return new WwwUser(new Long(u.getId()),u.getUsername(), u.getPassword(),u.getEmail(),u.getRoles());
     }
 
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
-        return getUser(username);
+        return find(username);
     }
 
+    @Override
     @Transactional
-    public void register(WwwUser u) {
+    public void add(WwwUser u) {
         UserEntity dbu = new UserEntity();
         dbu.setEmail(u.getEmail());
         dbu.setPassword(passwordEncoder.encode(u.getPassword()));
@@ -54,16 +58,17 @@ public class UserServiceImpl implements UserService{
         Iterator<String> i = u.getRoleNames().iterator();
         Set<RoleEntity> roles = new HashSet<>();
         while (i.hasNext()) {
-            roles.add(roleRepository.getRole(i.next()));
+            roles.add(roleRepository.find(i.next()));
         }
         dbu.setRoles(roles);
 
         dbu.setUsername(u.getUsername());
-        userRepository.store(dbu);
+        userRepository.add(dbu);
     }
 
-    public List<WwwUser> getUsers() {
-        List<UserEntity> users = userRepository.getUsers();
+    @Override
+    public List<WwwUser> findAll() {
+        List<UserEntity> users = userRepository.findAll();
         ArrayList<WwwUser> wwwUserArrayList = new ArrayList<WwwUser>();
         if (users != null && !users.isEmpty()) {
             for (UserEntity u : users) {

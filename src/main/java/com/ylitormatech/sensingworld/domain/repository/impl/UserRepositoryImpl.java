@@ -17,23 +17,30 @@ public class UserRepositoryImpl implements UserRepository{
     @PersistenceContext
     EntityManager em;
 
-    public UserEntity getUser(Integer id) {
+    @Override
+    public UserEntity find(Integer id) {
         return em.find(UserEntity.class, id);
     }
 
-    public UserEntity getUser(String username) {
+    @Override
+    public UserEntity find(String username) {
         return em.createQuery("FROM UserEntity u WHERE u.username=:username", UserEntity.class).setParameter("username",username).getSingleResult();
     }
 
-    public List<UserEntity> getUsers() {
+    @Override
+    public List<UserEntity> findAll() {
         return (List<UserEntity>)em.createQuery("FROM UserEntity u").getResultList();
     }
 
-    public void store(UserEntity u) {
+    @Override
+    public void add(UserEntity u) {
         em.persist(u);
     }
 
+    @Override
     public void update(UserEntity u) {
         em.merge(u);
     }
+
+
 }

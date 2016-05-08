@@ -5,19 +5,23 @@ import com.ylitormatech.sensingworld.domain.entity.UserEntity;
 
 import javax.management.relation.Role;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by marco on 7.5.2016.
  */
 public interface RoleRepository {
 
-    public RoleEntity getRole(Integer id);
+    public RoleEntity find(Integer id);
 
-    public RoleEntity getRole(String name);
+    public RoleEntity find(String name);
 
-    public List<RoleEntity> getRoles();
+    public List<RoleEntity> findAll();
 
-    public void store(RoleEntity r);
+    public void add(RoleEntity r);
 
     public void update(RoleEntity r);
+
+    public void remove(Integer i);
+    public void remove(RoleEntity r);
 }

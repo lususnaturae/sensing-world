@@ -39,15 +39,15 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
-    public String register2(@PathVariable("id") Long id, Model model) {
-        WwwUser user = userService.getUser(id);
+    public String register2(@PathVariable("id") Integer id, Model model) {
+        WwwUser user = userService.find(id);
         model.addAttribute("user", user);
         return "/thyme/userregistered";
     }
 
     @RequestMapping(value = "/account/list", method = RequestMethod.GET)
     public String list(Model model) {
-        model.addAttribute("users", userService.getUsers());
+        model.addAttribute("users", userService.findAll());
 
         return "/thyme/userlist";
     }

@@ -18,22 +18,26 @@ public class RoleServiceImpl implements RoleService{
     @Autowired
     RoleRepository roleRepository;
 
+    @Override
     public List<RoleEntity> findAll() {
-        return roleRepository.getRoles();
+        return roleRepository.findAll();
     }
 
+    @Override
     public RoleEntity find(Integer id) {
-        return roleRepository.getRole(id);
+        return roleRepository.find(id);
     }
 
+    @Override
     public void update(RoleEntity r) {
         roleRepository.update(r);
     }
 
-    public RoleEntity create(String name) {
+    @Override
+    public RoleEntity add(String name) {
         RoleEntity roleEntity = new RoleEntity();
         roleEntity.setName(name);
-        roleRepository.store(roleEntity);
+        roleRepository.add(roleEntity);
         return roleEntity;
     }
 }

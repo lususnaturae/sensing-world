@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface UserService extends UserDetailsService{
 
-    public WwwUser getUser(String username);
+    public WwwUser find(String username);
 
-    public WwwUser getUser(Long userId);
+    public WwwUser find(Integer id);
 
     public UserDetails loadUserByUsername(String username);
 
-    public void register(WwwUser u);
+    public void add(WwwUser u);
 
-    public List<WwwUser> getUsers();
+    public List<WwwUser> findAll();
 }

@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface UserRepository {
 
-    public UserEntity getUser(Integer id);
+    public UserEntity find(Integer id);
 
-    public UserEntity getUser(String username);
+    public UserEntity find(String username);
 
-    public List<UserEntity> getUsers();
+    public List<UserEntity> findAll();
 
-    public void store(UserEntity u);
+    public void add(UserEntity u);
 
     public void update(UserEntity u);
 }

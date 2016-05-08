@@ -1,22 +1,31 @@
 package com.ylitormatech.sensingworld.domain.entity;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
+
 
 /**
  * Created by marco on 7.5.2016.
  */
 @Entity
-@Table(name = "role")
+@Table(name = "roleentity")
 public class RoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String name;
-    @ManyToMany(mappedBy = "users")
-    private Set<UserEntity> users;
 
+    private String name;
+
+    @ManyToOne
+    private List<UserEntity> users;
+
+    public RoleEntity() {
+    }
+
+    public RoleEntity(String name) {
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -34,11 +43,11 @@ public class RoleEntity {
         this.name = name;
     }
 
-    public Set<UserEntity> getUsers() {
+    public List<UserEntity> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<UserEntity> users) {
+    public void setUsers(List<UserEntity> users) {
         this.users = users;
     }
 }

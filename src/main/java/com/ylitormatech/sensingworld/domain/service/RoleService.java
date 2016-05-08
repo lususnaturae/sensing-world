@@ -15,7 +15,5 @@ public interface RoleService {
 
     public void update(RoleEntity r);
 
-
-
-    public RoleEntity create(String name);
+    public RoleEntity add(String name);
 }
