@@ -5,6 +5,7 @@ import com.ylitormatech.sensingworld.domain.service.UserService;
 import com.ylitormatech.sensingworld.web.UserRegisterForm;
 import com.ylitormatech.sensingworld.web.WwwUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.acls.domain.PrincipalSid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -50,5 +51,20 @@ public class AccountController {
 
         return "/thyme/userlist";
     }
+
+    @RequestMapping(value = "/mylogin", method = RequestMethod.GET)
+    public String login(Model model) {
+        model.addAttribute("users", userService.getUsers());
+
+        return "/thyme/loginform";
+    }
+
+    @RequestMapping(value = "/mylogin", method = RequestMethod.POST)
+    public String login(Principal principal, Model model) {
+        model.addAttribute("users", userService.getUsers());
+
+        return "/thyme/loggedin";
+    }
+
 
 }
