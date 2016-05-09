@@ -88,6 +88,7 @@
                 <security:user name="bob" password="bobspassword" authorities="ROLE_USER" />
             </security:user-service>
         </security:authentication-provider>
+        <security:authentication-provider ref="myAuthenticationProvider"/>
     </security:authentication-manager>
 
     <security:http use-expressions="true"  >
@@ -105,10 +106,14 @@
 
 
         <!-- login-processing-url is /login and spring will log the user there or redirect back to login-page -->
-        <security:form-login login-page="/mylogin" default-target-url="/loggedin" />
-        <security:logout logout-success-url="/loggedout" />
+        <security:form-login login-page="/account/login" default-target-url="/account/loggedin" />
+        <security:logout logout-success-url="/account/loggedout" />
 
         <security:anonymous enabled="true" username="anonymous" granted-authority="ROLE_ANONYMOUS" />
     </security:http>
+
+    <bean id="myAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+    <property name="userDetailsService" ref="userService" />
+    </bean>
 
 </beans>

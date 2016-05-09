@@ -52,19 +52,25 @@ public class AccountController {
         return "/thyme/userlist";
     }
 
-    @RequestMapping(value = "/mylogin", method = RequestMethod.GET)
+    @RequestMapping(value = "/account/login", method = RequestMethod.GET)
     public String login(Model model) {
-        model.addAttribute("users", userService.getUsers());
+
 
         return "/thyme/loginform";
     }
 
-    @RequestMapping(value = "/mylogin", method = RequestMethod.POST)
-    public String login(Principal principal, Model model) {
-        model.addAttribute("users", userService.getUsers());
+    @RequestMapping(value = "/account/loggedin", method = RequestMethod.GET)
+    public String loggedin(Model model) {
 
         return "/thyme/loggedin";
     }
+
+    @RequestMapping(value = "/account/loggedout", method = RequestMethod.GET)
+    public String loggedout(Model model) {
+
+        return "/thyme/loggedout";
+    }
+
 
 
 }
