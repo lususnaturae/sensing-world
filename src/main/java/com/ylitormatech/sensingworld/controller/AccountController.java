@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.security.Principal;
+
 /**
  * Created by marco on 6.5.2016.
  */
@@ -60,13 +62,13 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/account/loggedin", method = RequestMethod.GET)
-    public String loggedin(Model model) {
+    public String loggedin(Principal principal, Model model) {
 
-        return "/thyme/loggedin";
+        return "/thyme/homeloggedin";
     }
 
     @RequestMapping(value = "/account/loggedout", method = RequestMethod.GET)
-    public String loggedout(Model model) {
+    public String loggedout(Principal principal, Model model) {
 
         return "/thyme/loggedout";
     }

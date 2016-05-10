@@ -14,7 +14,7 @@
         <mysql.connector.version>5.1.21</mysql.connector.version>
         <spring.version>4.2.2.RELEASE</spring.version>
         <spring.security.version>4.0.4.RELEASE</spring.security.version>
-        <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+        <thymeleaf.version>2.1.2.RELEASE</thymeleaf.version>
         <tomcat.version>7.0.47</tomcat.version>
         <junit.version>3.8.1</junit.version>
 
@@ -89,6 +89,21 @@
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring4</artifactId>
             <version>${thymeleaf.version}</version>
+        </dependency>
+        <!-- Spring security tags with th -->
+
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+            <version>${thymeleaf.version}</version>
+        </dependency>
+
+        <!-- format jodatimes with thymeleaf -->
+
+        <dependency>
+            <groupId>uk.co.gcwilliams</groupId>
+            <artifactId>jodatime-thymeleaf-dialect</artifactId>
+            <version>1.3</version>
         </dependency>
 
 
