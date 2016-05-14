@@ -2,7 +2,9 @@ package com.ylitormatech.sensingworld.controller;
 
 import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
 import com.ylitormatech.sensingworld.domain.service.SensorService;
+import com.ylitormatech.sensingworld.domain.service.UserService;
 import com.ylitormatech.sensingworld.web.SensorForm;
+import com.ylitormatech.sensingworld.web.WwwUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +29,9 @@ public class SensorController {
     @Autowired
     SensorService sensorService;
 
+    @Autowired
+    UserService userService;
+
     private static final String USAGE_CHOICES = "usageChoices";
 
     @ModelAttribute
@@ -36,7 +42,7 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/sensors/new", method = RequestMethod.GET)
-    public String createSensor(Locale locale, Model model) {
+    public String createSensor(Locale locale, Principal principal, Model model) {
         logger.debug("Create SensorEntity Controller - GET");
         SensorEntity sensor = new SensorEntity();
         model.addAttribute("sensorForm", sensor);
@@ -44,7 +50,7 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/sensors/new", method = RequestMethod.POST)
-    public String createSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, Model model) {
+    public String createSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, Principal principal, Model model) {
         logger.debug("Create SensorEntity Controller - POST");
         // TODO: add validator
         SensorEntity sensorEntity = sensorService.create(sensorForm.getName(), sensorForm.getUsagetoken());
@@ -52,7 +58,7 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/sensors/list", method = RequestMethod.GET)
-    public String listSensors(Locale locale, Model model) {
+    public String listSensors(Locale locale, Principal principal, Model model) {
         logger.debug("List SensorEntity Controller - GET");
         // TODO: add validator
         model.addAttribute("sensorForms", sensorService.findAll());
@@ -60,7 +66,7 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/sensors/{id}/show", method = RequestMethod.GET)
-    public String showSensor( @PathVariable("id") Integer id, Model model) {
+    public String showSensor(@PathVariable("id") Integer id, Principal principal, Model model) {
         logger.debug("Show SensorEntity Controller - GET");
 
         model.addAttribute("sensorForm", sensorService.find(id));
@@ -68,7 +74,7 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/sensors/{id}/update", method = RequestMethod.GET)
-    public String updateSensor( @PathVariable("id") Integer id, Model model) {
+    public String updateSensor( @PathVariable("id") Integer id, Principal principal, Model model) {
         logger.debug("Update SensorEntity Controller - GET");
 
         model.addAttribute("sensorForm", sensorService.find(id));
@@ -76,7 +82,7 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/sensors/{id}/update", method = RequestMethod.POST)
-    public String updateSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, @PathVariable("id") Integer id, Model model) {
+    public String updateSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, Principal principal, @PathVariable("id") Integer id, Model model) {
         logger.debug("Update SensorEntity Controller - POST");
         // TODO: add validator
         SensorEntity sensor = new SensorEntity();
@@ -87,7 +93,7 @@ public class SensorController {
 
 
     @RequestMapping(value = "/sensors/{id}/deleteconfirmation", method = RequestMethod.GET)
-    public String deleteonfirmationSensor( @PathVariable("id") Integer id, Model model) {
+    public String deleteonfirmationSensor( @PathVariable("id") Integer id, Principal principal, Model model) {
         logger.debug("Update SensorEntity Controller - GET");
 
         model.addAttribute("sensorForm", sensorService.find(id));
@@ -95,7 +101,7 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/sensors/{id}/delete", method = RequestMethod.GET)
-    public String deleteSensor( @PathVariable("id") Integer id, Model model) {
+    public String deleteSensor( @PathVariable("id") Integer id, Principal principal, Model model) {
         logger.debug("Update SensorEntity Controller - GET");
 
         sensorService.remove(id);
