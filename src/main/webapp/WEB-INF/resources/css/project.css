@@ -15,3 +15,19 @@
     text-shadow: #444 0 1px 1px;
     background:transparent;
 }
+
+/*Set input placeholder color*/
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #737373;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #737373;
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #737373;
+    opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #737373;
+}

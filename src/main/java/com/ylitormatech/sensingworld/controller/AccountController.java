@@ -70,7 +70,7 @@ public class AccountController {
     @RequestMapping(value = "/account/loggedout", method = RequestMethod.GET)
     public String loggedout(Principal principal, Model model) {
 
-        return "/thyme/loggedout";
+        return "redirect:/";
     }
 
 

@@ -27,34 +27,20 @@ Navbar
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">My project</a>
+            <a class="navbar-brand" href="#" ><span class="glyphicon glyphicon-home" aria-hidden="true"/></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li th:classappend="${page == 'home' ? 'active' : ''}"><a href="#" th:href="@{/}">Home</a></li>
-                <li th:classappend="${page == 'sensors' ? 'active' : ''}"><a href="#"
-                                                                              th:href="@{/message}">Messages</a></li>
-                <li th:classappend="${page == 'analytics' ? 'active' : ''}"><a href="#" th:href="@{/task}">Tasks</a></li>
+                <!--<li th:classappend="${page == 'home' ? 'active' : ''}">-->
+                    <!--<a href="#" th:href="@{/}" th:text="#{nav.page.home.title}">Home</a></li>-->
+                <li th:if="${#authorization.expression('isAuthenticated()')}" th:classappend="${page == 'sensors' ? 'active' : ''}">
+                    <a href="#" th:href="@{/sensors/list}" th:text="#{nav.page.sensors.title}">Your sensors</a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}" th:classappend="${page == 'analytics' ? 'active' : ''}">
+                    <a href="#" th:href="@{/sensors/list}" th:text="#{nav.page.analytics.title}">Analytics</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <!--<li><a href="/login" th:href="@{/signin}">Sign-->
-                    <!--in</a></li>-->
-                <!--<li><a href="/logout" th:href="@{/logout}">Logout</a>-->
-                <!--</li>-->
-
-                    <!--<li th:if="${principal == null}"><a href="/login" th:href="@{/account/login}" th:text="login">Sign in</a></li>-->
-                    <!--<li th:if="${principal != null}"><a href="/logout" th:href="@{/logout}" th:text="logout">Logout</a></li>-->
-
-                <!--<sec:authorize access="isAnonymous()">-->
-                    <!--<li><a href="/login" th:href="@{/account/login}" th:text="login"/>login</li>-->
-                <!--</sec:authorize>-->
-
-                <!--<sec:authorize access="isFullyAuthenticated()">-->
-                    <!--<li><a href="/logout" th:href="@{/logout}" th:text="logout"/>logout</li>-->
-                <!--</sec:authorize>-->
-                <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login" th:href="@{/account/login}">Sign in</a></li>
+                <!--<li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login" th:href="@{/account/login}">Sign in</a></li>-->
                 <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="/logout" th:href="@{/logout}">Logout</a></li>
-
             </ul>
         </div>
         <!--/.nav-collapse -->

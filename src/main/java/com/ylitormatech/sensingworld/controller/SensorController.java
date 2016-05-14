@@ -102,5 +102,6 @@ public class SensorController {
         return "redirect:/sensors/list";
     }
 
+
 }
 
