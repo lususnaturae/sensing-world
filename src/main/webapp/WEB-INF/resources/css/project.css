@@ -8,6 +8,8 @@
     z-index: -1;
 }
 
+/* preventing navbar overlapping with body */
+body { padding-top: 70px; }
 
 .jumbotron {
     height: 600px;
