@@ -34,12 +34,21 @@ public class SensorServiceImpl implements SensorService{
         sensorRepository.remove(id);
     }
 
-    public SensorEntity create(String name, String usage) {
+    public SensorEntity add(String name, String usage) {
 
         SensorEntity sensorEntity = new SensorEntity();
         sensorEntity.setName(name);
         sensorEntity.setUsagetoken(usage);
         sensorRepository.add(sensorEntity);
         return sensorEntity;
+    }
+
+    public SensorEntity add(SensorEntity sensorEntity) {
+        sensorRepository.add(sensorEntity);
+        return sensorEntity;
+    }
+
+    public SensorEntity find(String name) {
+        return sensorRepository.find(name);
     }
 }
