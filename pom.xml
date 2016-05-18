@@ -204,6 +204,7 @@
                 <configuration>
                     <path>/</path>
                     <port>8888</port>
+                    <ajpPort>8009</ajpPort>
                 </configuration>
             </plugin>
         </plugins>

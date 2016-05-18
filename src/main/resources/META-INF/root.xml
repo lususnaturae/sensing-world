@@ -91,6 +91,8 @@
         <security:authentication-provider ref="myAuthenticationProvider"/>
     </security:authentication-manager>
 
+    <security:http pattern="/resources/**" security="none" />
+
     <security:http use-expressions="true"  >
         <security:csrf disabled="true" />
         <security:intercept-url pattern="/"  access="permitAll"/>

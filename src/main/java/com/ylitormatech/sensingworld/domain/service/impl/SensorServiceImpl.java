@@ -13,6 +13,7 @@ import java.util.List;
  * Created by Marco Ylitörmä on 02/05/16.
  */
 @Service("sensorService")
+@Transactional
 public class SensorServiceImpl implements SensorService{
 
     @Autowired

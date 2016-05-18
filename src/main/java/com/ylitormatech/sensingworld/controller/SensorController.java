@@ -53,7 +53,7 @@ public class SensorController {
     public String createSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, Principal principal, Model model) {
         logger.debug("Create SensorEntity Controller - POST");
         // TODO: add validator
-        SensorEntity sensorEntity = sensorService.create(sensorForm.getName(), sensorForm.getUsagetoken());
+        SensorEntity sensorEntity = sensorService.add(sensorForm.getName(), sensorForm.getUsagetoken());
         return "redirect:/sensors/" + sensorEntity.getId() + "/show";
     }
 
