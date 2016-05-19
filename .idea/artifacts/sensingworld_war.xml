@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="sensingworld:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="spring-th.war">
-      <element id="artifact" artifact-name="sensingworld:war exploded" />
-    </root>
-  </artifact>
-</component>
