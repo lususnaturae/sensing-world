@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SensingWorld.iml" filepath="$PROJECT_DIR$/SensingWorld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sensingworld.iml" filepath="$PROJECT_DIR$/sensingworld.iml" />
     </modules>
   </component>
 </project>
