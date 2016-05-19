@@ -54,7 +54,7 @@ public class SensorRestController {
                 "usagetoken.direction", "usagetoken.alert", "usagetoken.flag", "usagetoken.multifunction"));
     }
 
-    @CrossOrigin(origins = "https://jsfiddle.net")
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<List<SensorEntity>> listSensors() {
         logger.debug("REST List SensorEntity Controller - GET");
@@ -65,7 +65,7 @@ public class SensorRestController {
         return new ResponseEntity<List<SensorEntity>>(sensors,HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "https://jsfiddle.net")
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public  ResponseEntity<SensorEntity> showSensor(@PathVariable("id") Integer id) {
         logger.debug("Show SensorEntity Controller - GET");
