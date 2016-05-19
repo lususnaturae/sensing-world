@@ -39,8 +39,8 @@ Navbar
                     <a href="#" th:href="@{/sensors/list}" th:text="#{nav.page.analytics.title}">Analytics</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <!--<li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login" th:href="@{/account/login}">Sign in</a></li>-->
-                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="/logout" th:href="@{/logout}">Logout</a></li>
+                <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login" th:href="@{/account/register}" th:text="#{nav.page.register.title}">Register</a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="/logout" th:href="@{/logout}"  th:text="#{nav.page.logout.title}">Logout</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
