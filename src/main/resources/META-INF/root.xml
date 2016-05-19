@@ -91,6 +91,8 @@
         <security:authentication-provider ref="myAuthenticationProvider"/>
     </security:authentication-manager>
 
+    <security:http pattern="/resources/**" security="none" />
+
     <security:http use-expressions="true"  >
         <security:csrf disabled="true" />
         <security:intercept-url pattern="/"  access="permitAll"/>
@@ -106,7 +108,7 @@
 
 
         <!-- login-processing-url is /login and spring will log the user there or redirect back to login-page -->
-        <security:form-login login-page="/account/login" default-target-url="/account/loggedin" />
+        <security:form-login login-page="/" default-target-url="/account/loggedin"/>
         <security:logout logout-success-url="/account/loggedout" />
 
         <security:anonymous enabled="true" username="anonymous" granted-authority="ROLE_ANONYMOUS" />

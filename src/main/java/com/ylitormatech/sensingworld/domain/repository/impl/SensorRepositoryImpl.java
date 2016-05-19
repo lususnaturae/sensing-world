@@ -39,6 +39,16 @@ public class SensorRepositoryImpl implements SensorRepository{
         return (SensorEntity) query.getSingleResult();
     }
 
+    public SensorEntity find(String name) {
+        Query query = em.createQuery("FROM SensorEntity WHERE name=:name");
+        query.setParameter("name", name);
+        if (query.getFirstResult() == 0) {
+            return null;
+        }
+
+        return (SensorEntity) query.getSingleResult();
+    }
+
     public void update(SensorEntity sensorEntity) {
         em.merge(sensorEntity);
     }

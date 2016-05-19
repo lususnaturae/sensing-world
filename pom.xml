@@ -17,7 +17,7 @@
         <thymeleaf.version>2.1.2.RELEASE</thymeleaf.version>
         <tomcat.version>7.0.47</tomcat.version>
         <junit.version>3.8.1</junit.version>
-
+        <jackson.version>2.7.4</jackson.version>
     </properties>
     <dependencies>
         <dependency>
@@ -185,6 +185,13 @@
             <version>1.2</version>
         </dependency>
 
+        <!-- needed for RestController -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -197,6 +204,7 @@
                 <configuration>
                     <path>/</path>
                     <port>8888</port>
+                    <ajpPort>8009</ajpPort>
                 </configuration>
             </plugin>
         </plugins>
