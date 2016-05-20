@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
         <link href="../../resources/css/project.css"
               th:href="@{/resources/css/project.css}" rel="stylesheet" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"/>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.3/holder.min.js"/>
     </div>
@@ -39,8 +39,8 @@ Navbar
                     <a href="#" th:href="@{/sensors/list}" th:text="#{nav.page.analytics.title}">Analytics</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <!--<li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login" th:href="@{/account/login}">Sign in</a></li>-->
-                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="/logout" th:href="@{/logout}">Logout</a></li>
+                <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login" th:href="@{/account/register}" th:text="#{nav.page.register.title}">Register</a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="/logout" th:href="@{/logout}"  th:text="#{nav.page.logout.title}">Logout</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->

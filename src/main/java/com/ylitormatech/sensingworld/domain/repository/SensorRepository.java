@@ -14,15 +14,15 @@ public interface SensorRepository {
 
     void add(SensorEntity sensorEntity);
 
-    public List<SensorEntity> findAll();
+    List<SensorEntity> findAll();
 
-    public SensorEntity find(Integer id);
+    SensorEntity find(Integer id);
 
+    SensorEntity find(String name);
 
-    public void update(SensorEntity sensorEntity);
+    void update(SensorEntity sensorEntity);
 
-
-    public void remove(Integer id);
+    void remove(Integer id);
 
 
 

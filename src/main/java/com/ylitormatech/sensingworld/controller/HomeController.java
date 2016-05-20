@@ -18,4 +18,10 @@ public class HomeController {
     public String homePage(Principal principal, @AuthenticationPrincipal WwwUser user) {
         return principal != null ? "/thyme/homeloggedin" : "/thyme/home";
     }
+
+    //TODO: just bootstrap demo. you can remove this
+    @RequestMapping(value = {"/bootstrap", ""})
+    public String homePage() {
+        return "/thyme/bootstrapdemo";
+    }
 }
