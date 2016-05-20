@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.acls.domain.PrincipalSid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 /**
@@ -32,9 +35,11 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/account/register", method = RequestMethod.POST)
-    public String register2(@ModelAttribute("user") UserRegisterForm user, Model model) {
+    public String register2(@Valid @ModelAttribute("user") UserRegisterForm user, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            return "/thyme/userregisterform";
+        }
         userService.register(new WwwUser(null, user.getUsername(), user.getPassword(), user.getEmail(), user.getRole()));
-
         WwwUser u2 = userService.getUser(user.getUsername());
         model.addAttribute("user", u2);
         return "/thyme/userregistered";

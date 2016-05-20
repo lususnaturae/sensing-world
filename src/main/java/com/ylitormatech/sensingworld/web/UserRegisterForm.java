@@ -1,13 +1,22 @@
 package com.ylitormatech.sensingworld.web;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * Created by marco on 6.5.2016.
  */
 public class UserRegisterForm {
 
+    @NotEmpty
     String username;
+
+    @NotEmpty
     String email;
+
+    @NotEmpty
     String password;
+
+    @NotEmpty
     String role;
 
     public String getUsername() {

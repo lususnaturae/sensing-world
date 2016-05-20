@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+<div th:replace="/fragments/header :: navigation">&nbsp;</div>
 <div class="panel panel-default">
     <div class="panel-heading" style="background-color: green;">
         <h3 class="panel-title" style="color: white;">
@@ -31,6 +31,7 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" th:field="*{username}" name="username" th:placeholder="#{form.userregister.username.placeholder}"/>
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</span>
                     </div>
 
                 </div>
@@ -43,6 +44,7 @@
                     <div class="col-md-8">
                         <input type="text" th:field="*{password}" size="40" name="password"
                                th:placeholder="#{form.userregister.password.placeholder}"/>
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</span>
                     </div>
 
                 </div>
@@ -55,6 +57,7 @@
                     <div class="col-md-8">
                         <input type="text" th:field="*{email}" size="40" name="email"
                                th:placeholder="#{form.userregister.email.placeholder}"/>
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
                     </div>
 
                 </div>
@@ -67,6 +70,7 @@
                     <div class="col-md-8">
                         <input type="text" th:field="*{role}" size="40" name="role"
                                th:placeholder="#{form.userregister.role.placeholder}"/>
+                        <span th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Name Error</span>
                     </div>
 
                 </div>
