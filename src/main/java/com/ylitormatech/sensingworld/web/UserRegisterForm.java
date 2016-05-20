@@ -1,5 +1,6 @@
 package com.ylitormatech.sensingworld.web;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -10,7 +11,7 @@ public class UserRegisterForm {
     @NotEmpty
     String username;
 
-    @NotEmpty
+    @NotEmpty@Email
     String email;
 
     @NotEmpty

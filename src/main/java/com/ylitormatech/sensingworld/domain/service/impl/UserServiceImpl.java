@@ -23,6 +23,17 @@ public class UserServiceImpl implements UserService{
     @Autowired
     UserRepository userRepository;
 
+    /*
+    * In repository query with .getSingleResult(); causes exception if No entity found for query
+    * getUserSanityCheck work with .getResultList();
+    *
+    * */
+
+
+    public boolean getUserSanityCheck(String username){
+        return userRepository.getUserSanityCheck(username);
+    }
+
     public WwwUser getUser(String username) {
         UserEntity u = userRepository.getUser(username);
         return new WwwUser(new Long(u.getId()),u.getUsername(), u.getPassword(),u.getEmail(),u.getRole());

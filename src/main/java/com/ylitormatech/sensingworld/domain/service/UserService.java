@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface UserService extends UserDetailsService{
 
+    public boolean getUserSanityCheck(String username);
+
     public WwwUser getUser(String username);
 
     public WwwUser getUser(Long userId);

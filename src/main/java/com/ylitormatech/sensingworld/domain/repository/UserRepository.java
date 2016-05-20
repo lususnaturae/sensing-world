@@ -13,6 +13,8 @@ public interface UserRepository {
 
     public UserEntity getUser(String username);
 
+    public boolean getUserSanityCheck(String username);
+
     public List<UserEntity> getUsers();
 
     public void store(UserEntity u);
