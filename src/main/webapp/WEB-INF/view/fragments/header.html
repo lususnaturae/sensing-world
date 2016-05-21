@@ -37,6 +37,9 @@ Navbar
                     <a href="#" th:href="@{/sensors/list}" th:text="#{nav.page.sensors.title}">Your sensors</a></li>
                 <li th:if="${#authorization.expression('isAuthenticated()')}" th:classappend="${page == 'analytics' ? 'active' : ''}">
                     <a href="#" th:href="@{/sensors/list}" th:text="#{nav.page.analytics.title}">Analytics</a></li>
+                <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:classappend="${page == 'userlist' ? 'active' : ''}">
+                    <a href="#" th:href="@{/account/list}" th:text="#{nav.page.userlist.title}">User list</a></li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/login" th:href="@{/account/register}" th:text="#{nav.page.register.title}">Register</a></li>

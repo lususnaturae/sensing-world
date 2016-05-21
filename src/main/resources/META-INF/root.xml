@@ -106,6 +106,7 @@
 
         <security:intercept-url pattern="/form"  access="hasRole('ROLE_USER')"/>
 
+        <security:intercept-url pattern="/account/list"  access="hasRole('ROLE_ADMIN')"/>
 
         <!-- login-processing-url is /login and spring will log the user there or redirect back to login-page -->
         <security:form-login login-page="/" default-target-url="/account/loggedin"/>
