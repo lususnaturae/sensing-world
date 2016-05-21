@@ -33,6 +33,9 @@ public class UserServiceImpl implements UserService{
     public boolean getUserSanityCheck(String username){
         return userRepository.getUserSanityCheck(username);
     }
+    public boolean getUserSanityCheck(Long userId){
+        return userRepository.getUserSanityCheck(userId.intValue());
+    }
 
     public WwwUser getUser(String username) {
         UserEntity u = userRepository.getUser(username);

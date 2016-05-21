@@ -13,6 +13,8 @@ public interface UserService extends UserDetailsService{
 
     public boolean getUserSanityCheck(String username);
 
+    public boolean getUserSanityCheck(Long userId);
+
     public WwwUser getUser(String username);
 
     public WwwUser getUser(Long userId);

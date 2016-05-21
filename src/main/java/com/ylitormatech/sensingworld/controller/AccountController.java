@@ -7,6 +7,11 @@ import com.ylitormatech.sensingworld.web.WwwUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.acls.domain.PrincipalSid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Collection;
 
 /**
  * Created by marco on 6.5.2016.
@@ -63,12 +69,108 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
-    public String register2(@PathVariable("id") Long id, Model model) {
+    public String register2(@PathVariable("id") Long id, Model model, Authentication authentication, @AuthenticationPrincipal WwwUser user) {
         logger.debug("AccountController account/{"+ id + "} - Get");
-        WwwUser user = userService.getUser(id);
-        model.addAttribute("user", user);
-        return "/thyme/userregistered";
+        boolean isAdmin = false;
+        String role = "ROLE_ADMIN";
+
+        /*
+        * user is null if not authentication or in memory user
+        * For in-memory user should use authentication
+        * */
+
+        if(user != null) {
+            logger.debug("AccountController account/{"+ id + "} - Get - user != null");
+
+            if (user.getId().equals(id)) {
+                logger.debug("AccountController account/{"+ id + "} - Get - id equals user." + user.getId());
+
+                model.addAttribute("user", user);
+                return "/thyme/userregistered";
+            }
+
+           /*
+           * If user have multiple authority ROLE_ADMIN, ROLE_USER
+           * WwwUser.java need setAuthority method for this
+           *
+           *    for (GrantedAuthority auth : user.getAuthorities()) {
+           *     if (role.equals(auth.getAuthority()))
+           *         isAdmin = true;
+           * }
+           * */
+            logger.debug("AccountController account/{"+ id + "} - Get - id not equals user." + user.getId());
+
+            if(role.equals(user.getRole())){
+                logger.debug("AccountController account/{"+ id + "} - Get - user." + user.getId() + " have admin role");
+
+                /*
+                * Check is id exist
+                * Avoid null pointer exception
+                * */
+
+                    if(!userService.getUserSanityCheck(id)) {
+                        logger.debug("AccountController account/{"+ id + "} - Get - SanityCheck found current id");
+
+                        WwwUser userById = userService.getUser(id);
+                        model.addAttribute("user", userById);
+                        return "/thyme/userregistered";
+                    }
+                /*
+                * Where return if id not found?
+                * Userlist?????
+                * */
+                logger.debug("AccountController account/{"+ id + "} - Get - SanityCheck not found current id");
+                return "redirect:/";
+            }
+            /*
+            * Where to return if not user own id or user isn't admin?
+            * accessdenied page????
+            * */
+            logger.debug("AccountController account/{"+ id + "} - Get - User." + user.getId()+" not match id and user not admin");
+            return "redirect:/";
+
+        }if(authentication != null){
+            logger.debug("AccountController account/{"+ id + "} - Get - Authentication not null");
+
+            /*
+            * Can remove if inMemory user's not used
+            */
+            for (GrantedAuthority auth : authentication.getAuthorities()) {
+                if (role.equals(auth.getAuthority()))
+                    isAdmin = true;
+            }
+
+            if(isAdmin){
+                logger.debug("AccountController account/{"+ id + "} - Get - Authentication user is admin");
+               if(!userService.getUserSanityCheck(id)) {
+                   logger.debug("AccountController account/{"+ id + "} - Get - Authentication SanityCheck found current id");
+                    WwwUser userById = userService.getUser(id);
+                    model.addAttribute("user", userById);
+                    return "/thyme/userregistered";
+                }
+                /*
+                * Where return if id not found?
+                * Userlist?????
+                * */
+                logger.debug("AccountController account/{"+ id + "} - Get - Authentication SanityCheck not found current id");
+                return "redirect:/";
+            }
+            /*
+            * Where to return if not user own id or user isn't admin?
+            * accessdenied page????
+            * */
+            logger.debug("AccountController account/{"+ id + "} - Get - Authentication not null and not admin");
+            return "redirect:/";
+        }
+        logger.debug("AccountController account/{"+ id + "} - Get - No authorized user");
+        /*
+        * Where to return if user is null
+        * */
+
+        return "redirect:/";
+
     }
+
 
     @RequestMapping(value = "/account/list", method = RequestMethod.GET)
     public String list(Model model) {

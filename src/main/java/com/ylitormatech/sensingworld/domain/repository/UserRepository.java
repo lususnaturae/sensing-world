@@ -15,6 +15,8 @@ public interface UserRepository {
 
     public boolean getUserSanityCheck(String username);
 
+    public boolean getUserSanityCheck(Integer id);
+
     public List<UserEntity> getUsers();
 
     public void store(UserEntity u);
