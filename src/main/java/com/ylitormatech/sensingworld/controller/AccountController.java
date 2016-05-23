@@ -6,17 +6,12 @@ import com.ylitormatech.sensingworld.web.UserRegisterForm;
 import com.ylitormatech.sensingworld.web.WwwUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.acls.domain.PrincipalSid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Collection;
 
 /**
  * Created by marco on 6.5.2016.
@@ -120,16 +114,17 @@ public class AccountController {
                 * Userlist?????
                 * */
                 logger.debug("AccountController account/{"+ id + "} - Get - SanityCheck not found current id");
-                return "redirect:/";
+                model.addAttribute("errorMessage", "Id not found");
+                return "/thyme/error";
             }
             /*
             * Where to return if not user own id or user isn't admin?
             * accessdenied page????
             * */
             logger.debug("AccountController account/{"+ id + "} - Get - User." + user.getId()+" not match id and user not admin");
-            return "redirect:/";
-
-        }if(authentication != null){
+            model.addAttribute("errorMessage", "Not Id owner");
+            return "/thyme/error";
+        } else if(authentication != null){
             logger.debug("AccountController account/{"+ id + "} - Get - Authentication not null");
 
             /*
@@ -153,14 +148,16 @@ public class AccountController {
                 * Userlist?????
                 * */
                 logger.debug("AccountController account/{"+ id + "} - Get - Authentication SanityCheck not found current id");
-                return "redirect:/";
+                model.addAttribute("errorMessage", "Id not found");
+                return "/thyme/error";
             }
             /*
             * Where to return if not user own id or user isn't admin?
             * accessdenied page????
             * */
             logger.debug("AccountController account/{"+ id + "} - Get - Authentication not null and not admin");
-            return "redirect:/";
+            model.addAttribute("errorMessage", "Not Id owner");
+            return "/thyme/error";
         }
         logger.debug("AccountController account/{"+ id + "} - Get - No authorized user");
         /*
