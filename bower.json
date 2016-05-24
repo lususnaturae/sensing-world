@@ -23,6 +23,7 @@
     "moment": "^2.13.0",
     "fullcalendar": "^2.7.2",
     "bootstrap": "^3.3.6",
+    "d3": "^3.5.17",
     "holderjs": "^2.9.3"
   }
 }
