@@ -7,12 +7,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <div th:fragment="headerscripts" th:remove="tag">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="../../resources/static/bower_components/bootstrap/dist/css/bootstrap.css"
+        th:href="@{/resources/static/bower_components/bootstrap/dist/css/bootstrap.css}"/>
+        <!--<link rel="stylesheet" href="../../resources/static/bower_components/bootstrap/dist/css/bootstrap-theme.css"-->
+              <!--th:href="@{/resources/static/bower_components/bootstrap/dist/css/bootstrap-theme.css}"/>-->
+
+        <script src="../../resources/static/bower_components/jquery/dist/jquery.js"
+        th:src="@{/resources/static/bower_components/jquery/dist/jquery.js}"/>
+        <script src="../../resources/static/bower_components/bootstrap/dist/js/bootstrap.js"
+                th:src="@{/resources/static/bower_components/bootstrap/dist/js/bootstrap.js}"/>
+        <script src="../../resources/static/bower_components/holderjs/holder.js"
+                th:src="@{/resources/static/bower_components/holderjs/holder.js}"/>
+
         <link href="../../resources/css/project.css"
               th:href="@{/resources/css/project.css}" rel="stylesheet" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"/>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.3/holder.min.js"/>
+        <script src="../../resources/js/project.js"
+                th:src="@{/resources/js/project.js}"/>
     </div>
 
 </head>
