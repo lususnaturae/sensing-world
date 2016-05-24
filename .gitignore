@@ -34,6 +34,7 @@
 /out/
 /lib/
 /target/
+/src/main/webapp/WEB-INF/resources/static/bower_components/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
