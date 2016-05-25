@@ -23,5 +23,7 @@ public interface UserService extends UserDetailsService{
 
     public void register(WwwUser u);
 
+    public void updateUser(WwwUser u);
+
     public List<WwwUser> getUsers();
 }

@@ -61,6 +61,18 @@ public class UserServiceImpl implements UserService{
         userRepository.store(dbu);
     }
 
+    @Transactional(readOnly = false)
+    public void updateUser(WwwUser u){
+        Integer userid = Integer.valueOf(u.getId().intValue());
+        UserEntity dbu = userRepository.getUser(userid);
+        dbu.setEmail(u.getEmail());
+        dbu.setPassword(u.getPassword());
+        dbu.setRole(u.getRole());
+        dbu.setUsername(u.getUsername());
+        userRepository.update(dbu);
+    }
+
+
     public List<WwwUser> getUsers() {
         List<UserEntity> users = userRepository.getUsers();
         ArrayList<WwwUser> wwwUserArrayList = new ArrayList<WwwUser>();
