@@ -71,6 +71,12 @@ public class UserServiceImpl implements UserService{
         dbu.setUsername(u.getUsername());
         userRepository.update(dbu);
     }
+    @Transactional(readOnly = false)
+    public void removeUser(Long id){
+        Integer userid = Integer.valueOf(id.intValue());
+        userRepository.remove(userid);
+    }
+
 
 
     public List<WwwUser> getUsers() {

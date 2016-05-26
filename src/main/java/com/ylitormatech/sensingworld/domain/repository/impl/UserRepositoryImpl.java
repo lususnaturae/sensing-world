@@ -54,4 +54,10 @@ public class UserRepositoryImpl implements UserRepository{
     public void update(UserEntity u) {
         em.merge(u);
     }
+
+    public void remove(Integer id) {
+        UserEntity userEntity = getUser(id);
+        em.remove(userEntity);
+    }
+
 }

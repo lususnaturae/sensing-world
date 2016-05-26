@@ -28,6 +28,7 @@ import java.security.Principal;
 public class AccountController {
 
     private static final String UPDATE_PATH = "/update/";
+    private static final String DElETE_PATH = "/delete/";
 
     Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -223,6 +224,61 @@ public class AccountController {
         bindingResult.rejectValue("username","Username is exist","Username is in use");
         logger.debug("AccountController /account"+path+"{"+ id +"} - Post - Username exist " + user.getUsername());
         return "/thyme/userupdate";
+    }
+
+    @RequestMapping(value = "/account/delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Long id, Model model, Authentication authentication, @AuthenticationPrincipal WwwUser user){
+        String path = DElETE_PATH;
+        logger.debug("AccountController account"+ path +"{"+ id + "} - Get");
+        boolean isAdmin = false;
+        String role = "ROLE_ADMIN";
+        if(user != null) {
+            logger.debug("AccountController account" + path + "{" + id + "} - Get - user != null");
+
+            if (role.equals(user.getRole())) {
+                logger.debug("AccountController account" + path + "{" + id + "} - Get - user." + user.getId() + " have admin role");
+
+                if (!userService.getUserSanityCheck(id)) {
+                    logger.debug("AccountController account" + path + "{" + id + "} - Get - SanityCheck found current id");
+
+                    userService.removeUser(id);
+
+                    model.addAttribute("users", userService.getUsers());
+                    return "/thyme/userlist";
+                }
+                logger.debug("AccountController account" + path + "{" + id + "} - Get - SanityCheck not found current id");
+                model.addAttribute("errorMessage", "Id not found");
+                return "/thyme/error";
+            }
+        }else if(authentication != null){
+            logger.debug("AccountController account"+ path +"{"+ id + "} - Get - Authentication not null");
+
+            /*
+            * Can remove if inMemory user's not used
+            */
+            for (GrantedAuthority auth : authentication.getAuthorities()) {
+                if (role.equals(auth.getAuthority()))
+                    isAdmin = true;
+            }
+
+            if(isAdmin){
+                logger.debug("AccountController account"+ path +"{"+ id + "} - Get - Authentication user is admin");
+                if(!userService.getUserSanityCheck(id)) {
+                    logger.debug("AccountController account"+ path +"{"+ id + "} - Get - Authentication SanityCheck found current id");
+                    userService.removeUser(id);
+
+                    model.addAttribute("users", userService.getUsers());
+                    return "/thyme/userlist";
+                }
+                logger.debug("AccountController account"+ path +"{"+ id + "} - Get - Authentication SanityCheck not found current id");
+                model.addAttribute("errorMessage", "Id not found");
+                return "/thyme/error";
+            }
+        }
+
+
+
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/account/list", method = RequestMethod.GET)

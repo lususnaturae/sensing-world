@@ -2,6 +2,7 @@ package com.ylitormatech.sensingworld.domain.repository;
 
 import com.ylitormatech.sensingworld.domain.entity.UserEntity;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**
@@ -22,4 +23,6 @@ public interface UserRepository {
     public void store(UserEntity u);
 
     public void update(UserEntity u);
+
+    public void remove(Integer id);
 }
