@@ -15,54 +15,62 @@
 <div class="panel panel-default">
     <div class="panel-heading" style="background-color: green;">
         <h3 class="panel-title" style="color: white;">
-            <strong th:text="#{form.userregister.formtitle}">Luo sensorit perusteksti</strong></h3>
+            <strong th:text="#{form.userupdate.formtitle}">Luo sensorit perusteksti</strong></h3>
     </div>
-    <div class="panel-body" th:object="${user}">
+    <div class="panel-body">
 
+        <form th:object="${user}" method="post" th:action="@{'/account/update/'+${user.id}}" >
 
 
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-4">
-                        <label class="control-label" th:text="#{form.userregister.username.label}">
-                           Käyttäjätunnus
+                        <label class="control-label" th:text="#{form.userupdate.username.label}">
+                            Käyttäjätunnus
                         </label>
                     </div>
                     <div class="col-md-8">
-                        <span type="text" th:text="${user.getUsername()}"/>
+                        <input type="text" th:field="*{username}" name="username" th:placeholder="#{form.userupdate.username.placeholder}"/>
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</span>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <label class="control-label" th:text="#{form.userregister.password.label}">
+                        <label class="control-label" th:text="#{form.userupdate.password.label}">
                             Salasana
                         </label>
                     </div>
                     <div class="col-md-8">
-                        <span type="text" th:text="${user.getPassword()}" />
+                        <input type="text" th:field="*{password}" size="40" name="password"
+                               th:placeholder="#{form.userupdate.password.placeholder}"/>
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</span>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <label class="control-label" th:text="#{form.userregister.email.label}">
+                        <label class="control-label" th:text="#{form.userupdate.email.label}">
                             Sähköposti
                         </label>
                     </div>
                     <div class="col-md-8">
-                        <span type="text" th:text="${user.getEmail()}" />
+                        <input type="text" th:field="*{email}" size="40" name="email"
+                               th:placeholder="#{form.userupdate.email.placeholder}"/>
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <label class="control-label" th:text="#{form.userregister.role.label}">
+                        <label class="control-label" th:text="#{form.userupdate.role.label}">
                             Rooli
                         </label>
                     </div>
                     <div class="col-md-8">
-                        <span type="text" th:text="#{${user.getRole()}}" />
+                        <input type="text" th:field="*{role}" size="40" name="role"
+                               th:placeholder="#{form.userupdate.role.placeholder}"/>
+                        <span th:if="${#fields.hasErrors('role')}" th:errors="*{role}">Name Error</span>
                     </div>
 
                 </div>
@@ -73,16 +81,17 @@
                 </div>
                 <div class="row">
                     <button type="button" class="btn btn-xs btn-primary" disabled="disabled"
-                            th:text="#{form.userregister.addimgbutton.name}">Lataa oma kuvasi
+                            th:text="#{form.userupdate.addimgbutton.name}">Lataa oma kuvasi
                     </button>
 
                 </div>
             </div>
-        <a role="button" th:href="@{/}" class="btn btn-small btn-primary" th:text="#{form.userregistered.loginpage.name}" >Muokkaa</a>
+            <button type="submit" class="btn btn-small btn-primary" th:text="#{form.userupdate.confirmbutton.name}">
+                SENS
+            </button>
 
 
-
-
+        </form>
     </div>
 
 </div>
