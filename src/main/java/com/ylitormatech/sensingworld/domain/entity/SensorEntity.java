@@ -23,6 +23,9 @@ public class SensorEntity {
     @Column(length = 40)
     String usagetoken;
 
+    @Column(length = 100)
+    String apikey;
+
     public SensorEntity() {
     }
 
@@ -33,6 +36,14 @@ public class SensorEntity {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getApikey() {
+        return apikey;
+    }
+
+    public void setApikey(String apikey) {
+        this.apikey = apikey;
     }
 
     public void setId(Integer id) {

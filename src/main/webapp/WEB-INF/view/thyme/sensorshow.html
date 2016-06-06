@@ -15,36 +15,49 @@
             <strong th:text="#{form.sensorshow.formtitle}">Luo sensorit perusteksti</strong></h3>
     </div>
     <div class="panel-body">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label class="control-label" th:text="#{form.sensorshow.name.label}">
-                            Sensorin nimi
-                        </label>
-                    </div>
-                    <div class="col-md-8">
-                        <span th:text="${sensorForm.name}">Sensorin nimi</span>
-                    </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label" th:text="#{form.sensorshow.name.label}">
+                        Sensorin nimi
+                    </label>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label class="control-label" th:text="#{form.sensorcreate.usagetoken.label}">
-                            Sensorin tyyppi
-                        </label>
-                    </div>
-                    <div class="col-md-8">
-                        <span th:text="#{${sensorForm.usagetoken}}">Sensorin nimi</span>
-                    </div>
+                <div class="col-md-8">
+                    <span th:text="${sensorForm.name}">Sensorin nimi</span>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <img data-src="holder.js/200x200"/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label" th:text="#{form.sensorcreate.usagetoken.label}">
+                        Sensorin tyyppi
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <span th:text="#{${sensorForm.usagetoken}}">Sensorin nimi</span>
                 </div>
             </div>
-            <a role="button" th:href="@{/sensors/__${sensorForm.id}__/update}" class="btn btn-small btn-primary" th:text="#{form.sensorshow.editsensorbutton.name}" >Muokkaa</a>
-        <a role="button" th:href="@{/sensors/__${sensorForm.id}__/deleteconfirmation}" class="btn btn-small btn-danger" th:text="#{form.sensorshow.deletesensorbutton.name}" >Poista</a>
-        <a role="button" th:href="@{/sensors/list}" class="btn btn-small btn-default " th:text="#{form.sensorshow.tosensorlistbutton.name}" >Palaa</a>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label" th:text="#{form.sensorcreate.apikey.label}">
+                        Sensorin apikey
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <span th:text="${sensorForm.apikey}">Sensorin apikey</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <img data-src="holder.js/200x200"/>
+            </div>
+        </div>
+        <a role="button" th:href="@{/sensors/__${sensorForm.id}__/update}" class="btn btn-small btn-primary"
+           th:text="#{form.sensorshow.editsensorbutton.name}">Muokkaa</a>
+        <a role="button" th:href="@{/sensors/__${sensorForm.id}__/deleteconfirmation}" class="btn btn-small btn-danger"
+           th:text="#{form.sensorshow.deletesensorbutton.name}">Poista</a>
+        <a role="button" th:href="@{/sensors/list}" class="btn btn-small btn-default "
+           th:text="#{form.sensorshow.tosensorlistbutton.name}">Palaa</a>
 
     </div>
 </div>

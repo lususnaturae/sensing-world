@@ -68,8 +68,11 @@ public class SensorController {
     @RequestMapping(value = "/sensors/{id}/show", method = RequestMethod.GET)
     public String showSensor(@PathVariable("id") Integer id, Principal principal, Model model) {
         logger.debug("Show SensorEntity Controller - GET");
-
-        model.addAttribute("sensorForm", sensorService.find(id));
+        SensorEntity se = sensorService.find(id);
+        if (se.getApikey() == null) {
+            se.setApikey("NO KEY");
+        }
+        model.addAttribute("sensorForm", se);
         return "/thyme/sensorshow";
     }
 

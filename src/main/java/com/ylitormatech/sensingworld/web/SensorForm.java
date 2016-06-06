@@ -12,6 +12,7 @@ public class SensorForm {
     Integer id;
     String name;
     String usagetoken;
+    String apikey;
 
     public Integer getId() {
         return id;
@@ -37,5 +38,12 @@ public class SensorForm {
         this.usagetoken = usagetoken;
     }
 
+    public String getApikey() {
+        return apikey;
+    }
+
+    public void setApikey(String apikey) {
+        this.apikey = apikey;
+    }
 
 }

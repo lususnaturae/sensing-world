@@ -3,6 +3,8 @@ package com.ylitormatech.sensingworld.domain.service.impl;
 import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
 import com.ylitormatech.sensingworld.domain.repository.SensorRepository;
 import com.ylitormatech.sensingworld.domain.service.SensorService;
+import com.ylitormatech.sensingworld.security.ApiKeyGenerator;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +42,7 @@ public class SensorServiceImpl implements SensorService{
         SensorEntity sensorEntity = new SensorEntity();
         sensorEntity.setName(name);
         sensorEntity.setUsagetoken(usage);
+        sensorEntity.setApikey(new ApiKeyGenerator().createNewApiKey(name));
         sensorRepository.add(sensorEntity);
         return sensorEntity;
     }
