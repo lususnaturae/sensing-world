@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +25,16 @@ public class SensorServiceImpl implements SensorService{
     public List<SensorEntity> findAll() {
         return sensorRepository.findAll();
     }
+
+    public List<String> findAllApiKeys() {
+        List<SensorEntity> ss = sensorRepository.findAll();
+        List<String> apikeys = new ArrayList<>();
+        for (SensorEntity s : ss) {
+            apikeys.add(s.getApikey());
+        }
+        return apikeys;
+    }
+
 
     public SensorEntity find(Integer id) {
         return sensorRepository.find(id);

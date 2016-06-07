@@ -65,6 +65,16 @@ public class SensorRestController {
         return new ResponseEntity<List<SensorEntity>>(sensors,HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/keys", method = RequestMethod.GET)
+    public ResponseEntity<List<String>> listSensorApiKeys() {
+        logger.debug("REST List SensorEntity Controller - GET");
+        List<String> apikeys = sensorService.findAllApiKeys();
+        if(apikeys.isEmpty()) {
+            return new ResponseEntity<List<String>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<String>>(apikeys,HttpStatus.OK);
+    }
+
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public  ResponseEntity<SensorEntity> showSensor(@PathVariable("id") Integer id) {
@@ -76,7 +86,7 @@ public class SensorRestController {
         return new ResponseEntity<SensorEntity>(sensor, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes="application/json")
+    @RequestMapping(value = "/create", method = RequestMethod.PUT)
     public ResponseEntity<Void> createSensor(@RequestBody SensorEntity sensor,    UriComponentsBuilder ucBuilder) {
         logger.debug("Create SensorEntity Controller - POST");
         // TODO: add validator

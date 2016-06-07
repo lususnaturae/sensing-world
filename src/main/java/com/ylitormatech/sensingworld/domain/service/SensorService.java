@@ -10,6 +10,8 @@ import java.util.List;
 public interface SensorService {
     public List<SensorEntity> findAll();
 
+    public List<String> findAllApiKeys();
+
     public SensorEntity find(Integer id);
 
     public SensorEntity find(String name);
