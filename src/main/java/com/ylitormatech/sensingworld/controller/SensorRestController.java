@@ -86,19 +86,19 @@ public class SensorRestController {
         return new ResponseEntity<SensorEntity>(sensor, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.PUT)
-    public ResponseEntity<Void> createSensor(@RequestBody SensorEntity sensor,    UriComponentsBuilder ucBuilder) {
-        logger.debug("Create SensorEntity Controller - POST");
-        // TODO: add validator
-        SensorEntity ss = sensorService.find(sensor.getName());
-        if (sensorService.find(sensor.getName()) != null) {
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-        }
-        sensorService.add(sensor);
-        HttpHeaders headers = new HttpHeaders();
-         headers.setLocation(ucBuilder.path("/{id}").buildAndExpand(sensor.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-    }
+//    @RequestMapping(value = "/create", method = RequestMethod.PUT)
+//    public ResponseEntity<Void> createSensor(@RequestBody SensorEntity sensor,    UriComponentsBuilder ucBuilder) {
+//        logger.debug("Create SensorEntity Controller - POST");
+//        // TODO: add validator
+//        SensorEntity ss = sensorService.find(sensor.getName());
+//        if (sensorService.find(sensor.getName()) != null) {
+//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+//        }
+//        sensorService.add(sensor);
+//        HttpHeaders headers = new HttpHeaders();
+//         headers.setLocation(ucBuilder.path("/{id}").buildAndExpand(sensor.getId()).toUri());
+//        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+//    }
 
 
 }

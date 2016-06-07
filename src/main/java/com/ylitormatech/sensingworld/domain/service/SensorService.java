@@ -1,6 +1,8 @@
 package com.ylitormatech.sensingworld.domain.service;
 
 import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
+import com.ylitormatech.sensingworld.domain.entity.UserEntity;
+import com.ylitormatech.sensingworld.web.WwwUser;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ public interface SensorService {
 
     public void remove(Integer id);
 
-    public SensorEntity add(String name, String usage);
+    public SensorEntity add(String name, String usage, WwwUser user);
 
     public SensorEntity add(SensorEntity sensorEntity);
 

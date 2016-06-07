@@ -48,25 +48,25 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
-    public String register2(@PathVariable("id") Long id, @AuthenticationPrincipal WwwUser user, Authentication authentication, Model model) {
+    public String register2(@PathVariable("id") Integer id, @AuthenticationPrincipal WwwUser user, Authentication authentication, Model model) {
         logger.debug("AccountController account/{"+ id + "} - Get");
         return controllerFacade.AccountReadIdGet(id, user, authentication, model);
     }
 
     @RequestMapping(value = "/account/update/{id}", method = RequestMethod.GET)
-    public String update(@PathVariable("id") Long id, @AuthenticationPrincipal WwwUser user, Authentication authentication, Model model) {
+    public String update(@PathVariable("id") Integer id, @AuthenticationPrincipal WwwUser user, Authentication authentication, Model model) {
         logger.debug("AccountController account/update/{"+ id + "} - Get");
         return controllerFacade.AccountUpdateGet(id, user, authentication, model);
     }
 
     @RequestMapping(value = "/account/update/{id}", method = RequestMethod.POST)
-    public String updatePost(@Valid @ModelAttribute("user") UserUpdateForm user, BindingResult bindingResult, @PathVariable("id") Long id, Model model) {
+    public String updatePost(@Valid @ModelAttribute("user") UserUpdateForm user, BindingResult bindingResult, @PathVariable("id") Integer id, Model model) {
         logger.debug("AccountController account/update/{"+ id + "} - Post");
         return controllerFacade.AccountUpdatePost(id, user, bindingResult, model);
     }
 
     @RequestMapping(value = "/account/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable("id") Long id,  @AuthenticationPrincipal WwwUser user, Authentication authentication, Model model){
+    public String delete(@PathVariable("id") Integer id,  @AuthenticationPrincipal WwwUser user, Authentication authentication, Model model){
         logger.debug("AccountController account/delete/{"+ id + "} - Get");
         return controllerFacade.AccountDeleteGet(id, user, authentication, model);
     }

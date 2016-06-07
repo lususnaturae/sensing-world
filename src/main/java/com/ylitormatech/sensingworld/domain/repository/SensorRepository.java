@@ -1,6 +1,7 @@
 package com.ylitormatech.sensingworld.domain.repository;
 
 import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
+import com.ylitormatech.sensingworld.domain.entity.UserEntity;
 
 import java.util.List;
 

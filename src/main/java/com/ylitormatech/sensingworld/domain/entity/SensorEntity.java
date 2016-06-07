@@ -26,6 +26,9 @@ public class SensorEntity {
     @Column(length = 100)
     String apikey;
 
+    @ManyToOne
+    UserEntity user;
+
     public SensorEntity() {
     }
 
@@ -68,6 +71,14 @@ public class SensorEntity {
 
     public boolean isNew() {
         return (this.id == null);
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     @Override

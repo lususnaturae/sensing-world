@@ -75,7 +75,7 @@ public class ControllerFacade {
         return "/thyme/error";
     }
 
-    public String AccountReadIdGet(Long id, WwwUser user, Authentication authentication, Model model) {
+    public String AccountReadIdGet(Integer id, WwwUser user, Authentication authentication, Model model) {
         String className = "AccountReadIdGet";
         String path = ACCOUNT_READ_PATH;
         String returnValue = "redirect:/";
@@ -90,7 +90,7 @@ public class ControllerFacade {
         return returnValue;
     }
 
-    public String AccountUpdateGet(Long id, WwwUser user, Authentication authentication, Model model){
+    public String AccountUpdateGet(Integer id, WwwUser user, Authentication authentication, Model model){
         String className = "AccountUpdateGet";
         String path = ACCOUNT_UPDATE_PATH;
         String returnValue = "redirect:/";
@@ -106,12 +106,12 @@ public class ControllerFacade {
         return returnValue;
     }
 
-    public String AccountUpdatePost(Long id, UserUpdateForm user, BindingResult bindingResult, Model model){
+    public String AccountUpdatePost(Integer id, UserUpdateForm user, BindingResult bindingResult, Model model){
         String className = "AccountUpdatePost";
         String returnValue = "redirect:/";
         logger.debug(className);
 
-        Long userId = Long.parseLong(user.getId());
+        Integer userId = Integer.parseInt(user.getId());
 
         if(bindingResult.hasErrors()) {
             logger.debug(className + " Validation failure");
@@ -142,7 +142,7 @@ public class ControllerFacade {
         return "/thyme/userupdate";
     }
 
-    public String AccountDeleteGet(Long id, WwwUser user, Authentication authentication, Model model) {
+    public String AccountDeleteGet(Integer id, WwwUser user, Authentication authentication, Model model) {
         String className = "AccountDeleteGet";
         String path = ACCOUNT_DElETE_PATH;
         String returnValue = "redirect:/";
@@ -165,7 +165,7 @@ public class ControllerFacade {
         return "/thyme/userlist";
     }
 
-    private String userRightCheck(Long id, WwwUser user, String path, Model model){
+    private String userRightCheck(Integer id, WwwUser user, String path, Model model){
         String className = "userRightCheck";
         logger.debug(className + "  path variable:" + path);
 
@@ -230,7 +230,7 @@ public class ControllerFacade {
         return "/thyme/error";
     }
 
-    private String inMemoryUserRightCheck(Long id, Authentication authentication, String path, Model model){
+    private String inMemoryUserRightCheck(Integer id, Authentication authentication, String path, Model model){
         String className = "inMemoryUserRightCheck";
         logger.debug(className + " path variable:" + path);
 

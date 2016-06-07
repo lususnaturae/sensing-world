@@ -1,5 +1,6 @@
 package com.ylitormatech.sensingworld.domain.service;
 
+import com.ylitormatech.sensingworld.domain.entity.UserEntity;
 import com.ylitormatech.sensingworld.web.WwwUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,11 +14,13 @@ public interface UserService extends UserDetailsService{
 
     public boolean getUserSanityCheck(String username);
 
-    public boolean getUserSanityCheck(Long userId);
+    public boolean getUserSanityCheck(Integer userId);
 
     public WwwUser getUser(String username);
 
-    public WwwUser getUser(Long userId);
+    public WwwUser getUser(Integer userId);
+
+    public UserEntity getUserEntity(Integer userId);
 
     public UserDetails loadUserByUsername(String username);
 
@@ -25,7 +28,7 @@ public interface UserService extends UserDetailsService{
 
     public void updateUser(WwwUser u);
 
-    public void removeUser(Long id);
+    public void removeUser(Integer id);
 
     public List<WwwUser> getUsers();
 }

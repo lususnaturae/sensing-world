@@ -8,6 +8,8 @@ import com.ylitormatech.sensingworld.web.WwwUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,18 +44,19 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/sensors/new", method = RequestMethod.GET)
-    public String createSensor(Locale locale, Principal principal, Model model) {
+    public String createSensor(Locale locale, @AuthenticationPrincipal WwwUser user, Model model) {
         logger.debug("Create SensorEntity Controller - GET");
         SensorEntity sensor = new SensorEntity();
+        sensor.setUser(userService.getUserEntity(user.getId()));
         model.addAttribute("sensorForm", sensor);
         return "/thyme/sensorform";
     }
 
     @RequestMapping(value = "/sensors/new", method = RequestMethod.POST)
-    public String createSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, Principal principal, Model model) {
+    public String createSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, @AuthenticationPrincipal WwwUser user, Model model) {
         logger.debug("Create SensorEntity Controller - POST");
         // TODO: add validator
-        SensorEntity sensorEntity = sensorService.add(sensorForm.getName(), sensorForm.getUsagetoken());
+        SensorEntity sensorEntity = sensorService.add(sensorForm.getName(), sensorForm.getUsagetoken(), user);
         return "redirect:/sensors/" + sensorEntity.getId() + "/show";
     }
 
@@ -77,7 +80,7 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/sensors/{id}/update", method = RequestMethod.GET)
-    public String updateSensor( @PathVariable("id") Integer id, Principal principal, Model model) {
+    public String updateSensor(@PathVariable("id") Integer id, @AuthenticationPrincipal WwwUser user, Model model) {
         logger.debug("Update SensorEntity Controller - GET");
 
         model.addAttribute("sensorForm", sensorService.find(id));

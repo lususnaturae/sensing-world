@@ -1,9 +1,7 @@
 package com.ylitormatech.sensingworld.domain.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by marco on 6.5.2016.
@@ -23,6 +21,9 @@ public class UserEntity {
     String role;
 
     String username;
+
+    @OneToMany
+    List<SensorEntity> sensors;
 
     public Integer getId() {
         return id;
@@ -64,4 +65,11 @@ public class UserEntity {
         this.username = username;
     }
 
+    public List<SensorEntity> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(List<SensorEntity> sensors) {
+        this.sensors = sensors;
+    }
 }

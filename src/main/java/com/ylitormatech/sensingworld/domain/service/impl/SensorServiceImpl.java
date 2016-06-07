@@ -1,9 +1,13 @@
 package com.ylitormatech.sensingworld.domain.service.impl;
 
 import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
+import com.ylitormatech.sensingworld.domain.entity.UserEntity;
 import com.ylitormatech.sensingworld.domain.repository.SensorRepository;
+import com.ylitormatech.sensingworld.domain.repository.UserRepository;
 import com.ylitormatech.sensingworld.domain.service.SensorService;
+
 import com.ylitormatech.sensingworld.security.ApiKeyGenerator;
+import com.ylitormatech.sensingworld.web.WwwUser;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,9 @@ public class SensorServiceImpl implements SensorService{
 
     @Autowired
     SensorRepository sensorRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     public List<SensorEntity> findAll() {
         return sensorRepository.findAll();
@@ -48,11 +55,12 @@ public class SensorServiceImpl implements SensorService{
         sensorRepository.remove(id);
     }
 
-    public SensorEntity add(String name, String usage) {
+    public SensorEntity add(String name, String usage, WwwUser u) {
 
         SensorEntity sensorEntity = new SensorEntity();
         sensorEntity.setName(name);
         sensorEntity.setUsagetoken(usage);
+        sensorEntity.setUser(userRepository.getUser(u.getId()));
         sensorEntity.setApikey(new ApiKeyGenerator().createNewApiKey(name));
         sensorRepository.add(sensorEntity);
         return sensorEntity;

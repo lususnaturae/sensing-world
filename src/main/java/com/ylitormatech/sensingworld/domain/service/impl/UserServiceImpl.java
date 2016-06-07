@@ -1,5 +1,6 @@
 package com.ylitormatech.sensingworld.domain.service.impl;
 
+import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
 import com.ylitormatech.sensingworld.domain.entity.UserEntity;
 import com.ylitormatech.sensingworld.domain.repository.UserRepository;
 import com.ylitormatech.sensingworld.domain.service.UserService;
@@ -33,18 +34,22 @@ public class UserServiceImpl implements UserService{
     public boolean getUserSanityCheck(String username){
         return userRepository.getUserSanityCheck(username);
     }
-    public boolean getUserSanityCheck(Long userId){
+    public boolean getUserSanityCheck(Integer userId){
         return userRepository.getUserSanityCheck(userId.intValue());
     }
 
     public WwwUser getUser(String username) {
         UserEntity u = userRepository.getUser(username);
-        return new WwwUser(new Long(u.getId()),u.getUsername(), u.getPassword(),u.getEmail(),u.getRole());
+        return new WwwUser(u.getId(),u.getUsername(), u.getPassword(),u.getEmail(),u.getRole());
     }
 
-    public WwwUser getUser(Long userId) {
-        UserEntity u = userRepository.getUser(userId.intValue());
-        return new WwwUser(new Long(u.getId()),u.getUsername(), u.getPassword(),u.getEmail(),u.getRole());
+    public WwwUser getUser(Integer userId) {
+        UserEntity u = userRepository.getUser(userId);
+        return new WwwUser(u.getId(),u.getUsername(), u.getPassword(),u.getEmail(),u.getRole());
+    }
+
+    public UserEntity getUserEntity(Integer userId) {
+        return userRepository.getUser(userId);
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
@@ -72,7 +77,7 @@ public class UserServiceImpl implements UserService{
         userRepository.update(dbu);
     }
     @Transactional(readOnly = false)
-    public void removeUser(Long id){
+    public void removeUser(Integer id){
         Integer userid = Integer.valueOf(id.intValue());
         userRepository.remove(userid);
     }
@@ -84,7 +89,7 @@ public class UserServiceImpl implements UserService{
         ArrayList<WwwUser> wwwUserArrayList = new ArrayList<WwwUser>();
         if (users != null && !users.isEmpty()) {
             for (UserEntity u : users) {
-                wwwUserArrayList.add(new WwwUser(new Long(u.getId()), u.getUsername(), u.getPassword(), u.getEmail(), u.getRole()));
+                wwwUserArrayList.add(new WwwUser(u.getId(), u.getUsername(), u.getPassword(), u.getEmail(), u.getRole()));
             }
         }
         return wwwUserArrayList;

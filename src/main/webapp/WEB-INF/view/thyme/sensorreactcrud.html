@@ -1,0 +1,47 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--<div th:replace="/fragments/header :: headerscripts">&nbsp;</div>-->
+    <title>Sensor List Form</title>
+
+    <!--<link rel="stylesheet" href="../../resources/static/bower_components/bootstrap/dist/css/bootstrap.css"-->
+          <!--th:href="@{/resources/static/bower_components/bootstrap/dist/css/bootstrap.css}"/>-->
+    <!--<link rel="stylesheet" href="../../resources/static/bower_components/bootstrap/dist/css/bootstrap-theme.css"-->
+    <!--th:href="@{/resources/static/bower_components/bootstrap/dist/css/bootstrap-theme.css}"/>-->
+
+    <script src="../../resources/static/bower_components/jquery/dist/jquery.js"
+            th:src="@{/resources/static/bower_components/jquery/dist/jquery.js}"></script>
+    <script src="../../resources/static/bower_components/bootstrap/dist/js/bootstrap.js"
+            th:src="@{/resources/static/bower_components/bootstrap/dist/js/bootstrap.js}"></script>
+    <script src="../../resources/static/bower_components/d3/d3.js"
+            th:src="@{/resources/static/bower_components/d3/d3.js}"></script>
+
+    <!--<script src="../../resources/static/bower_components/holderjs/holder.js"-->
+            <!--th:src="@{/resources/static/bower_components/holderjs/holder.js}"></script>-->
+
+    <script src="../../resources/static/bower_components/react/react.js"
+            th:src="@{/resources/static/bower_components/react/react.js}" ></script>
+    <script src="../../resources/static/bower_components/react/react-dom.js"
+            th:src="@{/resources/static/bower_components/react/react-dom.js}" ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.js"></script>
+
+    <link href="../../resources/css/project.css"
+          th:href="@{/resources/css/project.css}" rel="stylesheet" />
+    <script type="text/babel" src="../../resources/js/project.js"
+            th:src="@{/resources/js/project.js}"></script>
+
+</head>
+<body>
+<div th:replace="/fragments/header :: navigation">&nbsp;</div>
+
+<!--React stuff here-->
+<div id="sensorcrud"></div>
+
+
+<div th:replace="/fragments/footer :: footer">&copy; 2016 Ylitormatech</div>
+</body>
+</html>

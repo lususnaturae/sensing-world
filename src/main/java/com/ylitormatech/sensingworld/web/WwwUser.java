@@ -13,7 +13,7 @@ import java.util.Iterator;
  */
 public class WwwUser implements UserDetails {
 
-    private Long id;
+    private Integer id;
     private String username;
     protected String password;
 
@@ -30,7 +30,7 @@ public class WwwUser implements UserDetails {
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ANONYMOUS"));
     }
 
-    public WwwUser(Long id, String username, String password) {
+    public WwwUser(Integer id, String username, String password) {
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ANONYMOUS"));
         setUsername(username);
         setPassword(password);
@@ -39,7 +39,7 @@ public class WwwUser implements UserDetails {
         enabled = true;
     }
 
-    public WwwUser(Long id, String username, String password, String email, String role) {
+    public WwwUser(Integer id, String username, String password, String email, String role) {
         grantedAuthorities.add(new SimpleGrantedAuthority(role));
         setUsername(username);
         setPassword(password);
@@ -85,11 +85,11 @@ public class WwwUser implements UserDetails {
         return true;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
