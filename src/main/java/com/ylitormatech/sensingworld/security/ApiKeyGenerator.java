@@ -2,6 +2,8 @@ package com.ylitormatech.sensingworld.security;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by marco on 6.6.2016.
@@ -12,8 +14,10 @@ public class ApiKeyGenerator {
         return generateApiKey(data);
     }
 
-    private String generateApiKey(String data) {
+    private String generateApiKey(String txt) {
         String result = null;
+        String data = txt + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(data.getBytes("UTF-8"));
