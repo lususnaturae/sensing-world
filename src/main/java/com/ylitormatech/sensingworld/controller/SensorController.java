@@ -61,17 +61,17 @@ public class SensorController {
     }
 
     @RequestMapping(value = "/sensors/list", method = RequestMethod.GET)
-    public String listSensors(Locale locale, Principal principal, Model model) {
+    public String listSensors(Locale locale, @AuthenticationPrincipal WwwUser user, Model model) {
         logger.debug("List SensorEntity Controller - GET");
         // TODO: add validator
-        model.addAttribute("sensorForms", sensorService.findAll());
+        model.addAttribute("sensorForms", sensorService.findMySensors(user.getId()));
         return "/thyme/sensorlist";
     }
 
     @RequestMapping(value = "/sensors/{id}/show", method = RequestMethod.GET)
-    public String showSensor(@PathVariable("id") Integer id, Principal principal, Model model) {
+    public String showSensor(@PathVariable("id") Integer id, @AuthenticationPrincipal WwwUser user, Model model) {
         logger.debug("Show SensorEntity Controller - GET");
-        SensorEntity se = sensorService.find(id);
+        SensorEntity se = sensorService.findMySensor(id, user.getId());
         if (se.getApikey() == null) {
             se.setApikey("NO KEY");
         }
@@ -83,12 +83,12 @@ public class SensorController {
     public String updateSensor(@PathVariable("id") Integer id, @AuthenticationPrincipal WwwUser user, Model model) {
         logger.debug("Update SensorEntity Controller - GET");
 
-        model.addAttribute("sensorForm", sensorService.find(id));
+        model.addAttribute("sensorForm", sensorService.findMySensor(id, user.getId()));
         return "/thyme/sensorform";
     }
 
     @RequestMapping(value = "/sensors/{id}/update", method = RequestMethod.POST)
-    public String updateSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, Principal principal, @PathVariable("id") Integer id, Model model) {
+    public String updateSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, @AuthenticationPrincipal WwwUser user, @PathVariable("id") Integer id, Model model) {
         logger.debug("Update SensorEntity Controller - POST");
         // TODO: add validator
         SensorEntity sensor = new SensorEntity();
@@ -99,18 +99,18 @@ public class SensorController {
 
 
     @RequestMapping(value = "/sensors/{id}/deleteconfirmation", method = RequestMethod.GET)
-    public String deleteonfirmationSensor( @PathVariable("id") Integer id, Principal principal, Model model) {
+    public String deleteonfirmationSensor( @PathVariable("id") Integer id, @AuthenticationPrincipal WwwUser user, Model model) {
         logger.debug("Update SensorEntity Controller - GET");
 
-        model.addAttribute("sensorForm", sensorService.find(id));
+        model.addAttribute("sensorForm", sensorService.findMySensor(id, user.getId()));
         return "/thyme/sensordeleteconfirmation";
     }
 
     @RequestMapping(value = "/sensors/{id}/delete", method = RequestMethod.GET)
-    public String deleteSensor( @PathVariable("id") Integer id, Principal principal, Model model) {
+    public String deleteSensor( @PathVariable("id") Integer id, @AuthenticationPrincipal WwwUser user, Model model) {
         logger.debug("Update SensorEntity Controller - GET");
 
-        sensorService.remove(id);
+        sensorService.removeMySensor(id, user.getId());
         return "redirect:/sensors/list";
     }
 

@@ -12,15 +12,21 @@ import java.util.List;
 public interface SensorService {
     public List<SensorEntity> findAll();
 
+    public List<SensorEntity> findMySensors(Integer Id);
+
     public List<String> findAllApiKeys();
 
     public SensorEntity find(Integer id);
+
+    public SensorEntity findMySensor(Integer id, Integer userid);
 
     public SensorEntity find(String name);
 
     public void update(SensorEntity q);
 
     public void remove(Integer id);
+
+    public void removeMySensor(Integer id, Integer userid);
 
     public SensorEntity add(String name, String usage, WwwUser user);
 

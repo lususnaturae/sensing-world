@@ -33,6 +33,10 @@ public class SensorServiceImpl implements SensorService{
         return sensorRepository.findAll();
     }
 
+    public List<SensorEntity> findMySensors(Integer id) {
+        return sensorRepository.findMySensors(id);
+    }
+
     public List<String> findAllApiKeys() {
         List<SensorEntity> ss = sensorRepository.findAll();
         List<String> apikeys = new ArrayList<>();
@@ -47,12 +51,20 @@ public class SensorServiceImpl implements SensorService{
         return sensorRepository.find(id);
     }
 
+    public SensorEntity findMySensor(Integer id, Integer userid) {
+        return sensorRepository.findMySensor(id, userid);
+    }
+
     public void update(SensorEntity s) {
         sensorRepository.update(s);
     }
 
     public void remove(Integer id) {
         sensorRepository.remove(id);
+    }
+
+    public void removeMySensor(Integer id, Integer userid) {
+        sensorRepository.removeMySensor(id, userid);
     }
 
     public SensorEntity add(String name, String usage, WwwUser u) {

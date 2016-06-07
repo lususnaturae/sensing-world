@@ -33,6 +33,20 @@ public class SensorRepositoryImpl implements SensorRepository{
         return list;
     }
 
+    public List<SensorEntity> findMySensors(Integer id) {
+        List<SensorEntity> list = em.createQuery("FROM SensorEntity  WHERE user_id=:id").setParameter("id", id)
+                .getResultList();
+        return list;
+    }
+    public SensorEntity findMySensor(Integer id, Integer userid) {
+        Query query = em.createQuery("FROM SensorEntity WHERE id=:id AND user_id=:userid");
+        query.setParameter("id", id);
+        query.setParameter("userid", userid);
+
+        return (SensorEntity) query.getSingleResult();
+    }
+
+
     public SensorEntity find(Integer id) {
         Query query = em.createQuery("FROM SensorEntity WHERE id=:id");
         query.setParameter("id", id);
@@ -58,6 +72,15 @@ public class SensorRepositoryImpl implements SensorRepository{
         query.setParameter("id", id);
         em.remove((SensorEntity) query.getSingleResult());
     }
+
+    public void removeMySensor(Integer id, Integer userid) {
+        Query query = em.createQuery("FROM SensorEntity WHERE id=:id and user_id=:userid");
+        query.setParameter("id", id);
+        query.setParameter("userid", userid);
+        em.remove((SensorEntity) query.getSingleResult());
+    }
+
+
 
 //    public SensorEntity find(Integer id) {
 //        SensorEntity sensorEntity = null;

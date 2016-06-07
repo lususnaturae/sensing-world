@@ -17,6 +17,10 @@ public interface SensorRepository {
 
     List<SensorEntity> findAll();
 
+    List<SensorEntity> findMySensors(Integer id);
+
+    SensorEntity findMySensor(Integer id, Integer userid);
+
     SensorEntity find(Integer id);
 
     SensorEntity find(String name);
@@ -24,6 +28,7 @@ public interface SensorRepository {
     void update(SensorEntity sensorEntity);
 
     void remove(Integer id);
+    void removeMySensor(Integer id, Integer userid);
 
 
 
