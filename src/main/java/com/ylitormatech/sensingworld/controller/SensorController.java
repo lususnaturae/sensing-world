@@ -1,6 +1,7 @@
 package com.ylitormatech.sensingworld.controller;
 
 import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
+import com.ylitormatech.sensingworld.domain.service.MessageService;
 import com.ylitormatech.sensingworld.domain.service.SensorService;
 import com.ylitormatech.sensingworld.domain.service.UserService;
 import com.ylitormatech.sensingworld.web.SensorForm;
@@ -8,6 +9,8 @@ import com.ylitormatech.sensingworld.web.WwwUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.integration.support.MessageBuilder;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +35,10 @@ public class SensorController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MessageService messageService;
+
+
     private static final String USAGE_CHOICES = "usageChoices";
 
     @ModelAttribute
@@ -54,6 +61,15 @@ public class SensorController {
         logger.debug("Create SensorEntity Controller - POST");
         // TODO: add validator
         SensorEntity sensorEntity = sensorService.add(sensorForm.getName(), sensorForm.getUsagetoken());
+
+        Message<String> message = MessageBuilder.withPayload(sensorEntity.getApikey())
+                .setHeader("Action", "New")
+                .build();
+
+        String reply = messageService.sendMessage(message);
+        logger.info("Replyheader: " + reply);
+
+
         return "redirect:/sensors/" + sensorEntity.getId() + "/show";
     }
 

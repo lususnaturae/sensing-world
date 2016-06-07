@@ -3,16 +3,23 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+
        xsi:schemaLocation="
                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd
-            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+                   http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-4.2.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
 
 
 
-    <context:component-scan base-package="com.ylitormatech.sensingworld">
+
+<context:component-scan base-package="com.ylitormatech.sensingworld">
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
 
@@ -118,5 +125,36 @@
     <bean id="myAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
     <property name="userDetailsService" ref="userService" />
     </bean>
+
+    <!-- INTEGRATION TO JMS AND BEARER IS ACTIVEMQ -->
+
+    <!-- Activemq connection factory -->
+    <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <!-- brokerURL, You may have different IP or port -->
+        <constructor-arg index="0" value="tcp://127.0.0.1:61616" />
+    </bean>
+
+    <!-- Pooled Spring connection factory -->
+    <bean id="connectionFactory"
+          class="org.springframework.jms.connection.CachingConnectionFactory">
+        <constructor-arg ref="amqConnectionFactory" />
+    </bean>
+
+
+    <amq:queue name="amqueue" id="amqueue" physicalName="xQ" />
+
+
+    <int-jms:outbound-gateway requires-reply="true"  id="jmsOut" request-destination="amqueue" request-channel="outQueue" />
+
+
+
+    <int:channel id="outQueue" />
+
+
+    <int:gateway default-reply-timeout="10000" service-interface="com.ylitormatech.sensingworld.domain.service.MessageService" default-request-channel="outQueue">
+
+    </int:gateway>
+
+
 
 </beans>
