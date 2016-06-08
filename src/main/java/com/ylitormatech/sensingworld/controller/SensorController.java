@@ -1,4 +1,4 @@
-﻿package com.ylitormatech.sensingworld.controller;
+package com.ylitormatech.sensingworld.controller;
 
 import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
 import com.ylitormatech.sensingworld.domain.service.MessageService;
@@ -35,7 +35,7 @@ public class SensorController {
 
     Logger logger = Logger.getLogger(this.getClass().getName());
 
-    private static final boolean INTEGRATION=true;
+    private static final boolean INTEGRATION=false;
 
     @Autowired
     SensorService sensorService;
