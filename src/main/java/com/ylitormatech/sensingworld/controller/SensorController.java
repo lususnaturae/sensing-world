@@ -9,6 +9,9 @@ import com.ylitormatech.sensingworld.web.WwwUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Controller;
@@ -24,10 +27,13 @@ import java.util.Locale;
 /**
  * Created by Marco Ylitörmä on 02/05/16.
  */
+
 @Controller
 public class SensorController {
 
     Logger logger = Logger.getLogger(this.getClass().getName());
+
+    private static final boolean INTEGRATION=true;
 
     @Autowired
     SensorService sensorService;
@@ -61,14 +67,14 @@ public class SensorController {
         logger.debug("Create SensorEntity Controller - POST");
         // TODO: add validator
         SensorEntity sensorEntity = sensorService.add(sensorForm.getName(), sensorForm.getUsagetoken());
+        if(INTEGRATION) {
+            Message<String> message = MessageBuilder.withPayload(sensorEntity.getApikey())
+                    .setHeader("Action", "New")
+                    .build();
 
-        Message<String> message = MessageBuilder.withPayload(sensorEntity.getApikey())
-                .setHeader("Action", "New")
-                .build();
-
-        String reply = messageService.sendMessage(message);
-        logger.info("Replyheader: " + reply);
-
+            String reply = messageService.sendMessage(message);
+            logger.info("Replyheader: " + reply);
+        }
 
         return "redirect:/sensors/" + sensorEntity.getId() + "/show";
     }
@@ -122,6 +128,16 @@ public class SensorController {
     @RequestMapping(value = "/sensors/{id}/delete", method = RequestMethod.GET)
     public String deleteSensor( @PathVariable("id") Integer id, Principal principal, Model model) {
         logger.debug("Update SensorEntity Controller - GET");
+        if(INTEGRATION) {
+            SensorEntity sensorEntity = sensorService.find(id);
+
+            Message<String> message = MessageBuilder.withPayload(sensorEntity.getApikey())
+                    .setHeader("Action", "Remove")
+                    .build();
+
+            String reply = messageService.sendMessage(message);
+            logger.info("Replyheader: " + reply);
+        }
 
         sensorService.remove(id);
         return "redirect:/sensors/list";
