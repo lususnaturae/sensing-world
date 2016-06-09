@@ -49,3 +49,4 @@ crashlytics-build.properties
 fabric.properties
 
 /wwwApp2a.log
+/src/main/resources/app.properties
