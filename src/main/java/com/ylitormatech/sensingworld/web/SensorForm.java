@@ -1,5 +1,7 @@
 package com.ylitormatech.sensingworld.web;
 
+import com.ylitormatech.sensingworld.domain.entity.SensorEntity;
+import com.ylitormatech.sensingworld.domain.entity.UserEntity;
 import org.springframework.core.style.ToStringCreator;
 
 import java.util.List;
@@ -13,6 +15,7 @@ public class SensorForm {
     String name;
     String usagetoken;
     String apikey;
+    Integer userid;
 
     public Integer getId() {
         return id;
@@ -46,4 +49,11 @@ public class SensorForm {
         this.apikey = apikey;
     }
 
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
 }

@@ -104,7 +104,6 @@ public class SensorController {
     @RequestMapping(value = "/sensors/{id}/update", method = RequestMethod.GET)
     public String updateSensor(@PathVariable("id") Integer id, @AuthenticationPrincipal WwwUser user, Model model) {
         logger.debug("Update SensorEntity Controller - GET");
-
         model.addAttribute("sensorForm", sensorService.findMySensor(id, user.getId()));
         return "/thyme/sensorform";
     }
@@ -112,18 +111,18 @@ public class SensorController {
     @RequestMapping(value = "/sensors/{id}/update", method = RequestMethod.POST)
     public String updateSensor(@ModelAttribute("sensorForm") SensorForm sensorForm, @AuthenticationPrincipal WwwUser user, @PathVariable("id") Integer id, Model model) {
         logger.debug("Update SensorEntity Controller - POST");
-        // TODO: add validator
-        SensorEntity sensor = new SensorEntity();
-        BeanUtils.copyProperties(sensorForm, sensor);
+
+        // find original sensor to get apikey and user reference that is not part of sensorForm
+        SensorEntity sensor = sensorService.find(id);
+        sensor.setName(sensorForm.getName());
+        sensor.setUsagetoken(sensorForm.getUsagetoken());
         sensorService.update(sensor);
         return "redirect:/sensors/{id}/show";
     }
 
-
     @RequestMapping(value = "/sensors/{id}/deleteconfirmation", method = RequestMethod.GET)
     public String deleteonfirmationSensor( @PathVariable("id") Integer id, @AuthenticationPrincipal WwwUser user, Model model) {
         logger.debug("Update SensorEntity Controller - GET");
-
         model.addAttribute("sensorForm", sensorService.findMySensor(id, user.getId()));
         return "/thyme/sensordeleteconfirmation";
     }
@@ -133,19 +132,14 @@ public class SensorController {
         logger.debug("Update SensorEntity Controller - GET");
         if(INTEGRATION) {
             SensorEntity sensorEntity = sensorService.find(id);
-
             Message<String> message = MessageBuilder.withPayload(sensorEntity.getApikey())
                     .setHeader("Action", "Remove")
                     .build();
-
             String reply = messageService.sendMessage(message);
             logger.info("Replyheader: " + reply);
         }
-
         sensorService.removeMySensor(id, user.getId());
         return "redirect:/sensors/list";
     }
-
-
 }
 

@@ -33,7 +33,8 @@
                         <input type="text" th:field="*{name}" size="40" name="name"
                                th:placeholder="#{form.sensorcreate.name.placeholder}"/>
                     </div>
-
+                    <input type="hidden" th:field="*{apikey}" name="name"/>
+                    <input type="hidden" th:field="*{user}" name="user"/>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
